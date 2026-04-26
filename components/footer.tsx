@@ -48,7 +48,9 @@ export function Footer() {
             </p>
             <div className="mt-6 flex gap-4">
               <a 
-                href="#" 
+                href="https://www.linkedin.com/company/elveon-tech"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors"
                 aria-label="LinkedIn"
               >
