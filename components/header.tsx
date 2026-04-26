@@ -23,7 +23,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-9h0dUX34BRgoaR3FK2tCSeupEKDm9j.png"
+              src="/logo.png"
               alt="Elveon Tech"
               width={120}
               height={48}
