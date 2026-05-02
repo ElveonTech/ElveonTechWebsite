@@ -21,8 +21,8 @@ const footerLinks = {
   ],
   legal: [
     { name: "Privacy Policy", href: "/privacy" },
+    { name: "Delete Account", href: "/delete-account" },
     { name: "Terms of Service", href: "#" },
-    { name: "Cookie Policy", href: "#" },
   ],
 }
 
