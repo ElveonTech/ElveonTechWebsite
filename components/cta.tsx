@@ -26,9 +26,12 @@ export function CTA() {
                 size="lg" 
                 variant="secondary" 
                 className="gap-2 bg-white text-primary hover:bg-white/90"
+                asChild
               >
-                Get in Touch
-                <ArrowRight className="w-4 h-4" />
+                <a href="mailto:contact@elveontech.nl">
+                  Get in Touch
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </Button>
             </div>
             
@@ -36,8 +39,8 @@ export function CTA() {
             <div className="mt-12 pt-8 border-t border-primary-foreground/20">
               <p className="text-primary-foreground/60 text-sm">
                 Or reach us directly at{" "}
-                <a href="mailto:contact@elveontech.com" className="text-primary-foreground hover:underline">
-                  contact@elveontech.com
+                <a href="mailto:contact@elveontech.nl" className="text-primary-foreground hover:underline">
+                  contact@elveontech.nl
                 </a>
               </p>
             </div>
