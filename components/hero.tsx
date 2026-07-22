@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Play } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 export function Hero() {
   return (
@@ -28,17 +28,16 @@ export function Hero() {
             </p>
             
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="gap-2">
-                Schedule a Demo
-                <ArrowRight className="w-4 h-4" />
+              <Button size="lg" className="gap-2" asChild>
+                <a href="mailto:contact@elveontech.nl">
+                  Get in Touch
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </Button>
-              <Button variant="outline" size="lg" className="gap-2">
-                <Play className="w-4 h-4" />
-                Watch Video
+              <Button variant="outline" size="lg" asChild>
+                <a href="#solutions">Explore Solutions</a>
               </Button>
             </div>
-            
-
           </div>
           
           {/* Visual Element */}
