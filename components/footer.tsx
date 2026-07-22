@@ -34,13 +34,15 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2.5">
-              <Image
-                src="/et-logo.png"
-                alt="Elveon Tech"
-                width={40}
-                height={40}
-                className="h-9 w-9 object-contain brightness-0 invert"
-              />
+              <span className="flex items-center justify-center h-9 w-9 rounded-md bg-white">
+                <Image
+                  src="/et-logo.png"
+                  alt="Elveon Tech"
+                  width={36}
+                  height={36}
+                  className="h-8 w-8 object-contain"
+                />
+              </span>
               <span className="font-semibold text-lg text-background">Elveon Tech</span>
             </Link>
             <p className="mt-4 text-background/60 text-sm leading-relaxed max-w-xs">
