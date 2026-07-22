@@ -20,9 +20,9 @@ const footerLinks = {
     { name: "Support", href: "#" },
   ],
   legal: [
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Delete Account", href: "/delete-account" },
+    { name: "Privacy Policy", href: "#" },
     { name: "Terms of Service", href: "#" },
+    { name: "Cookie Policy", href: "#" },
   ],
 }
 
@@ -35,7 +35,7 @@ export function Footer() {
           <div className="col-span-2">
             <Link href="/" className="flex items-center">
               <Image
-                src="/logo.png"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-9h0dUX34BRgoaR3FK2tCSeupEKDm9j.png"
                 alt="Elveon Tech"
                 width={120}
                 height={48}
@@ -48,9 +48,7 @@ export function Footer() {
             </p>
             <div className="mt-6 flex gap-4">
               <a 
-                href="https://www.linkedin.com/company/elveon-tech"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#" 
                 className="w-10 h-10 rounded-lg bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors"
                 aria-label="LinkedIn"
               >
