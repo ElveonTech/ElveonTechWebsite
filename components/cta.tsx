@@ -1,7 +1,11 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import { useTranslation } from "@/lib/i18n/translations"
 
 export function CTA() {
+  const { t } = useTranslation()
   return (
     <section id="contact" className="py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -14,11 +18,10 @@ export function CTA() {
           
           <div className="relative py-16 px-8 lg:py-24 lg:px-16 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary-foreground text-balance max-w-2xl mx-auto">
-              Ready to Transform Your Business Operations?
+              {t.cta.title}
             </h2>
             <p className="mt-6 text-lg text-primary-foreground/80 max-w-xl mx-auto">
-              Let&apos;s discuss your specific challenges and explore how automation 
-              can help. Schedule a free consultation to get started.
+              {t.cta.description}
             </p>
             
             <div className="mt-10 flex justify-center">
@@ -29,7 +32,7 @@ export function CTA() {
                 asChild
               >
                 <a href="mailto:contact@elveontech.nl">
-                  Get in Touch
+                  {t.cta.getInTouch}
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </Button>
@@ -38,7 +41,7 @@ export function CTA() {
             {/* Contact info */}
             <div className="mt-12 pt-8 border-t border-primary-foreground/20">
               <p className="text-primary-foreground/60 text-sm">
-                Or reach us directly at{" "}
+                {t.cta.directLead}{" "}
                 <a href="mailto:contact@elveontech.nl" className="text-primary-foreground hover:underline">
                   contact@elveontech.nl
                 </a>

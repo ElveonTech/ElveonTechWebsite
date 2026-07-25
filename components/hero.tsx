@@ -1,7 +1,11 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import { useTranslation } from "@/lib/i18n/translations"
 
 export function Hero() {
+  const { t } = useTranslation()
   return (
     <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
       {/* Subtle background accent */}
@@ -13,29 +17,28 @@ export function Hero() {
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
               <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-              Intelligent Automation Solutions
+              {t.hero.badge}
             </div>
             
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight text-balance">
-              Automate Your Business,{" "}
-              <span className="text-primary">Amplify</span> Your Growth
+              {t.hero.titleLead}{" "}
+              <span className="text-primary">{t.hero.titleHighlight}</span>
+              {t.hero.titleTrail}
             </h1>
             
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              I identify and solve the most pressing pain points in your industry, 
-              building tailored automation solutions that eliminate inefficiencies 
-              and drive measurable results.
+              {t.hero.description}
             </p>
             
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="gap-2" asChild>
                 <a href="mailto:contact@elveontech.nl">
-                  Get in Touch
+                  {t.hero.getInTouch}
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <a href="#solutions">Explore Solutions</a>
+                <a href="#solutions">{t.hero.exploreSolutions}</a>
               </Button>
             </div>
           </div>
@@ -60,7 +63,7 @@ export function Hero() {
                         <div className="h-3 w-24 bg-muted rounded" />
                         <div className="h-2 w-16 bg-muted rounded mt-2" />
                       </div>
-                      <div className="text-xs text-primary font-medium flex-shrink-0">Automated</div>
+                      <div className="text-xs text-primary font-medium flex-shrink-0">{t.hero.cardAutomated}</div>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-chart-2/10 flex items-center justify-center flex-shrink-0">
@@ -70,7 +73,7 @@ export function Hero() {
                         <div className="h-3 w-32 bg-muted rounded" />
                         <div className="h-2 w-20 bg-muted rounded mt-2" />
                       </div>
-                      <div className="text-xs text-chart-2 font-medium flex-shrink-0">Processing</div>
+                      <div className="text-xs text-chart-2 font-medium flex-shrink-0">{t.hero.cardProcessing}</div>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-chart-4/10 flex items-center justify-center flex-shrink-0">
@@ -80,7 +83,7 @@ export function Hero() {
                         <div className="h-3 w-28 bg-muted rounded" />
                         <div className="h-2 w-14 bg-muted rounded mt-2" />
                       </div>
-                      <div className="text-xs text-chart-4 font-medium flex-shrink-0">Complete</div>
+                      <div className="text-xs text-chart-4 font-medium flex-shrink-0">{t.hero.cardComplete}</div>
                     </div>
                   </div>
                   
@@ -91,8 +94,8 @@ export function Hero() {
                         <div className="w-3 h-3 rounded-full bg-primary" />
                       </div>
                       <div className="flex-1">
-                        <div className="text-sm font-medium text-foreground">Workflow Active</div>
-                        <div className="text-xs text-muted-foreground">Automation running smoothly</div>
+                        <div className="text-sm font-medium text-foreground">{t.hero.workflowActive}</div>
+                        <div className="text-xs text-muted-foreground">{t.hero.workflowSubtitle}</div>
                       </div>
                     </div>
                   </div>

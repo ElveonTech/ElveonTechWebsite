@@ -5,17 +5,20 @@ import Image from "next/image"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-
-const navLinks = [
-  { href: "/#solutions", label: "Solutions" },
-  { href: "/#industries", label: "Industries" },
-  { href: "/tijd-besparen", label: "Tijd besparen" },
-  { href: "/#about", label: "About" },
-  { href: "/#contact", label: "Contact" },
-]
+import { useTranslation } from "@/lib/i18n/translations"
+import { LanguageToggle } from "@/components/language-toggle"
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { t } = useTranslation()
+
+  const navLinks = [
+    { href: "/#solutions", label: t.nav.solutions },
+    { href: "/#industries", label: t.nav.industries },
+    { href: "/tijd-besparen", label: t.nav.timeSavings },
+    { href: "/#about", label: t.nav.about },
+    { href: "/#contact", label: t.nav.contact },
+  ]
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -49,8 +52,9 @@ export function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-4">
+            <LanguageToggle />
             <Button size="sm" asChild>
-              <a href="mailto:contact@elveontech.nl">Get Started</a>
+              <a href="mailto:contact@elveontech.nl">{t.nav.getStarted}</a>
             </Button>
           </div>
 
@@ -83,9 +87,10 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <div className="flex flex-col gap-2 pt-4 border-t border-border">
+            <div className="flex flex-col gap-3 pt-4 border-t border-border">
+              <LanguageToggle className="self-start" />
               <Button size="sm" asChild>
-                <a href="mailto:contact@elveontech.nl">Get Started</a>
+                <a href="mailto:contact@elveontech.nl">{t.nav.getStarted}</a>
               </Button>
             </div>
           </nav>
