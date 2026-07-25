@@ -298,10 +298,10 @@ function TimeSavingsResultContent() {
                         {t.timeSavingsResult.phone}
                       </div>
                       <a 
-                        href="tel:+31612345678"
+                        href="tel:+31628546303"
                         className="font-medium hover:underline"
                       >
-                        +31 6 1234 5678
+                        +31 6 28546303
                       </a>
                     </div>
                   </div>
