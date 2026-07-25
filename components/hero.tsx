@@ -16,7 +16,7 @@ export function Hero() {
       <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/50 -skew-x-12 translate-x-1/4" />
       
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: Hero Text Content */}
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
@@ -50,7 +50,7 @@ export function Hero() {
           </div>
           
           {/* Right: Personal/Founder Section */}
-          <div className="space-y-6 lg:mt-0 mt-12 lg:flex lg:flex-col lg:items-end">
+          <div className="lg:mt-0 mt-12">
             {/* Mobile: Photo left, Quote right (side by side) */}
             <div className="flex gap-4 items-center lg:hidden">
               {/* Photo */}
@@ -73,25 +73,23 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Desktop: Photo and Quote stacked, right-aligned */}
-            <div className="hidden lg:flex lg:flex-col lg:items-end lg:space-y-6">
+            {/* Desktop: Photo and Quote stacked, centered */}
+            <div className="hidden lg:flex lg:flex-col lg:items-center lg:space-y-6">
               {/* Photo */}
-              <div className="flex justify-end">
-                <div className="relative w-56 h-56 rounded-2xl overflow-hidden shadow-xl">
-                  <Image
-                    src="/founder-photo.jpg"
-                    alt="Founder"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
+              <div className="relative w-56 h-56 rounded-2xl overflow-hidden shadow-xl">
+                <Image
+                  src="/founder-photo.jpg"
+                  alt="Founder"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
 
               {/* Quote */}
               <div className="relative max-w-md">
                 <Quote className="absolute -top-2 -left-2 w-6 h-6 text-primary/20" />
-                <p className="text-base lg:text-lg font-medium text-foreground italic pl-6 lg:pl-8 text-right">
+                <p className="text-base lg:text-lg font-medium text-foreground italic pl-6 lg:pl-8 text-center">
                   {t.founder.quote}
                 </p>
               </div>
