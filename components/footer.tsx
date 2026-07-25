@@ -34,14 +34,15 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="col-span-2">
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center gap-2.5">
               <Image
-                src="/logo.png"
+                src="/et-logo-new.png"
                 alt="Elveon Tech"
-                width={120}
-                height={48}
-                className="h-10 w-auto brightness-0 invert"
+                width={40}
+                height={40}
+                className="h-9 w-9 object-contain"
               />
+              <span className="font-semibold text-lg text-background">Elveon Tech</span>
             </Link>
             <p className="mt-4 text-background/60 text-sm leading-relaxed max-w-xs">
               {t.footer.tagline}
