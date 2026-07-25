@@ -7,10 +7,11 @@ import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 const navLinks = [
-  { href: "#solutions", label: "Solutions" },
-  { href: "#industries", label: "Industries" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#solutions", label: "Solutions" },
+  { href: "/#industries", label: "Industries" },
+  { href: "/tijd-besparen", label: "Tijd besparen" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ]
 
 export function Header() {
