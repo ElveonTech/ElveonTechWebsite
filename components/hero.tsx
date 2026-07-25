@@ -50,7 +50,7 @@ export function Hero() {
           </div>
           
           {/* Right: Personal/Founder Section */}
-          <div className="lg:mt-0 mt-12">
+          <div className="lg:mt-0 mt-12 lg:justify-self-end lg:ml-auto">
             {/* Mobile: Photo left, Quote right (side by side) */}
             <div className="lg:hidden">
               <div className="flex gap-4 items-center">
