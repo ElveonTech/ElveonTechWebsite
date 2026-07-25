@@ -13,7 +13,7 @@ export const translations = {
       title1: "Geef Uw Tijd Niet Weg aan",
       title2: "Repetitief Werk",
       title3: "",
-      description: "Niets geeft mij meer voldoening dan mijn tijd inzetten om u een veelvoud daarvan terug te geven. Laat repetitieve taken verdwijnen, zodat u zich kunt richten op het werk dat er echt toe doet.",
+      description: "Wij helpen u uw tijd terug te krijgen. Door repetitieve taken te laten verdwijnen, kan uw team zich richten op het werk dat er echt toe doet - werk dat uitdaagt, groeit en waarde creëert.",
       calculateSavings: "Bereken Hoeveel Tijd U Kunt Besparen",
       scheduleCall: "Plan een Gesprek",
       watchVideo: "Bekijk Video",
@@ -26,7 +26,7 @@ export const translations = {
     solutions: {
       badge: "Waar Verdwijnt Uw Tijd?",
       title: "Laat Deze Taken Voor U Werken",
-      description: "Te veel kleine, repetitieve taken zorgen ervoor dat het vuur waarmee u ooit begon minder fel gaat branden. Dat vuur wil ik helpen terugbrengen.",
+      description: "Wij helpen u focus terug te krijgen. Te veel kleine, repetitieve taken zorgen ervoor dat het vuur minder fel gaat branden. Wij brengen dat vuur terug.",
       items: [
         {
           title: "Procesautomatisering",
@@ -57,7 +57,7 @@ export const translations = {
     industries: {
       badge: "Industries",
       title: "Uw Tijd Verdient Beter",
-      description: "In elke industrie zie ik dezelfde patronen: waardevolle tijd die opgaat aan taken die niemand leuk vindt. Tijd die u kunt besteden aan wat echt belangrijk is - groeien, creëren, of bij de mensen zijn van wie u houdt.",
+      description: "In elke industrie zien we dezelfde patronen: waardevolle tijd die opgaat aan taken die niemand leuk vindt. Wij helpen u die tijd te besteden aan wat echt belangrijk is - groeien, creëren, of bij de mensen zijn van wie u houdt.",
       items: [
         {
           name: "Productie",
@@ -86,10 +86,10 @@ export const translations = {
       ]
     },
     about: {
-      badge: "Mijn Filosofie",
+      badge: "Onze Filosofie",
       title: "Uw Tijd Hoort bij U",
-      description1: "Tijd is een van de waardevolste dingen die je iemand kunt geven. Het idee dat ik een deel van mijn tijd kan inzetten om u structureel veel meer tijd terug te geven, is precies waar ik energie van krijg.",
-      description2: "Uw tijd hoort niet op te gaan aan het archiveren van e-mails, eindeloos zoeken naar dat ene bericht of terugkerende taken waar u geen voldoening uit haalt. U moet zich kunnen richten op het werk dat er echt toe doet - werk dat uitdaagt, uw bedrijf vooruithelpt, inkomsten genereert, of u simpelweg een goed gevoel geeft.",
+      description1: "Tijd is een van de waardevolste dingen die je iemand kunt geven. Wij geloven dat uw team zich moet kunnen richten op het werk dat er echt toe doet - niet op repetitieve taken die niemand leuk vindt.",
+      description2: "Uw tijd hoort niet op te gaan aan het archiveren van e-mails, eindeloos zoeken of terugkerende taken. Wij bouwen oplossingen die repetitief werk naar de achtergrond laten verdwijnen, zonder dat u uw vertrouwde manier van werken hoeft los te laten.",
       values: [
         "Focus op werk dat echt waarde toevoegt",
         "Laat repetitief werk verdwijnen",
@@ -98,10 +98,17 @@ export const translations = {
         "Meer tijd voor creëren en groeien",
         "Structurele tijdsbesparing"
       ],
-      problemSolver: "Tijdredder",
+      problemSolver: "Tijdredders",
       problemSolverDesc: "Uw tijd teruggeven door repetitief werk te laten verdwijnen",
-      founderLed: "Oprichter-geleid",
-      directCollaboration: "Directe samenwerking"
+      founderLed: "Direct Contact",
+      directCollaboration: "Persoonlijke aanpak"
+    },
+    founder: {
+      badge: "Persoonlijk",
+      name: "Over Mij",
+      quote: "Niets geeft mij meer voldoening dan mijn tijd inzetten om anderen een veelvoud daarvan terug te geven.",
+      description: "Ik ben de oprichter van ElveonTech. Het idee dat ik een deel van mijn tijd kan inzetten en jou daar structureel veel meer tijd voor kan teruggeven, is precies waar ik energie van krijg. Die tijd kun je gebruiken om iets op te bouwen, je bedrijf te laten groeien, meer inkomen te creëren of bij de mensen te zijn van wie je houdt.",
+      mission: "Te veel kleine, repetitieve taken kunnen ervoor zorgen dat het vuur waarmee je ooit begon langzaam minder fel gaat branden. Dat vuur wil ik helpen terugbrengen."
     },
     cta: {
       title: "Klaar om Uw Tijd Terug te Krijgen?",
@@ -291,7 +298,7 @@ export const translations = {
       title1: "Don't Give Your Time to",
       title2: "Repetitive Work",
       title3: "",
-      description: "Nothing gives me more satisfaction than investing my time to give you back a multiple of it. Let repetitive tasks disappear, so you can focus on the work that truly matters.",
+      description: "We help you get your time back. By making repetitive tasks disappear, your team can focus on the work that truly matters - work that challenges, grows, and creates value.",
       calculateSavings: "Calculate How Much Time You Can Save",
       scheduleCall: "Schedule a Call",
       watchVideo: "Watch Video",
@@ -304,7 +311,7 @@ export const translations = {
     solutions: {
       badge: "Where Does Your Time Go?",
       title: "Let These Tasks Work for You",
-      description: "Too many small, repetitive tasks cause the fire you once started with to burn less bright. I want to help bring that fire back.",
+      description: "We help you regain focus. Too many small, repetitive tasks cause the fire to burn less bright. We bring that fire back.",
       items: [
         {
           title: "Process Automation",
@@ -335,7 +342,7 @@ export const translations = {
     industries: {
       badge: "Industries",
       title: "Your Time Deserves Better",
-      description: "In every industry, I see the same patterns: valuable time spent on tasks nobody enjoys. Time you could spend on what really matters - growing, creating, or being with the people you love.",
+      description: "In every industry, we see the same patterns: valuable time spent on tasks nobody enjoys. We help you spend that time on what really matters - growing, creating, or being with the people you love.",
       items: [
         {
           name: "Manufacturing",
@@ -364,10 +371,10 @@ export const translations = {
       ]
     },
     about: {
-      badge: "My Philosophy",
+      badge: "Our Philosophy",
       title: "Your Time Belongs to You",
-      description1: "Time is one of the most valuable things you can give someone. The idea that I can invest part of my time to structurally give you back much more, is exactly what energizes me.",
-      description2: "Your time shouldn't be spent archiving emails, endlessly searching for that one message, or on recurring tasks that don't fulfill you. You should be able to focus on work that truly matters - work that challenges you, moves your business forward, generates income, or simply makes you feel good.",
+      description1: "Time is one of the most valuable things you can give someone. We believe your team should be able to focus on work that truly matters - not on repetitive tasks nobody enjoys.",
+      description2: "Your time shouldn't be spent archiving emails, endlessly searching, or on recurring tasks. We build solutions that make repetitive work disappear, without forcing you to change your trusted way of working.",
       values: [
         "Focus on work that adds real value",
         "Make repetitive work disappear",
@@ -376,10 +383,17 @@ export const translations = {
         "More time for creating and growing",
         "Structural time savings"
       ],
-      problemSolver: "Time Saver",
+      problemSolver: "Time Savers",
       problemSolverDesc: "Giving you back your time by making repetitive work disappear",
-      founderLed: "Founder-Led",
-      directCollaboration: "Direct collaboration"
+      founderLed: "Direct Contact",
+      directCollaboration: "Personal approach"
+    },
+    founder: {
+      badge: "Personal",
+      name: "About Me",
+      quote: "Nothing gives me more satisfaction than investing my time to give others back a multiple of it.",
+      description: "I'm the founder of ElveonTech. The idea that I can invest part of my time and structurally give you back much more, is exactly what energizes me. That time you can use to build something, grow your business, create more income, or be with the people you love.",
+      mission: "Too many small, repetitive tasks can cause the fire you once started with to burn less bright. I want to help bring that fire back."
     },
     cta: {
       title: "Ready to Get Your Time Back?",
