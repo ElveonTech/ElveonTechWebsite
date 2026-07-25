@@ -50,10 +50,10 @@ export function Hero() {
           </div>
           
           {/* Right: Personal/Founder Section */}
-          <div className="space-y-6 lg:mt-0 mt-12">
+          <div className="space-y-6 lg:mt-0 mt-12 flex flex-col items-end">
             {/* Photo */}
-            <div className="flex justify-center lg:justify-start">
-              <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-2xl overflow-hidden shadow-xl">
+            <div className="flex justify-end">
+              <div className="relative w-48 h-48 lg:w-56 lg:h-56 rounded-2xl overflow-hidden shadow-xl">
                 <Image
                   src="/founder-photo.jpg"
                   alt="Founder"
@@ -65,9 +65,9 @@ export function Hero() {
             </div>
 
             {/* Quote */}
-            <div className="relative">
+            <div className="relative max-w-md">
               <Quote className="absolute -top-2 -left-2 w-6 h-6 text-primary/20" />
-              <p className="text-base lg:text-lg font-medium text-foreground italic pl-6 lg:pl-8">
+              <p className="text-base lg:text-lg font-medium text-foreground italic pl-6 lg:pl-8 text-right">
                 {t.founder.quote}
               </p>
             </div>
