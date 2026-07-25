@@ -71,7 +71,7 @@ export function Hero() {
                       {t.founder.title}
                     </span>
                     <a 
-                      href="https://www.linkedin.com/in/yourprofile" 
+                      href="https://www.linkedin.com/in/jurre-stiekema?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-primary transition-colors"
