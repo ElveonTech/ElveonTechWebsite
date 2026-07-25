@@ -6,11 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
 import { ArrowRight, Check } from "lucide-react"
 import { timeSavingTopics } from "@/lib/time-savings-data"
-import { useTranslation } from "@/lib/i18n/translations"
 
 export function TimeSavingsCalculator() {
   const router = useRouter()
-  const { t, lang } = useTranslation()
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [hours, setHours] = useState<number>(2)
 

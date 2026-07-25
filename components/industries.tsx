@@ -1,16 +1,39 @@
-"use client"
-
 import { Factory, Building2, Stethoscope, ShoppingCart, Truck, Landmark } from "lucide-react"
-import { useTranslation } from "@/lib/i18n/translations"
 
-const icons = [Factory, Building2, Stethoscope, ShoppingCart, Truck, Landmark]
+const industries = [
+  {
+    icon: Factory,
+    name: "Manufacturing",
+    description: "Optimize production lines, supply chains, and quality control with intelligent automation.",
+  },
+  {
+    icon: Building2,
+    name: "Real Estate",
+    description: "Streamline property management, tenant communications, and documentation workflows.",
+  },
+  {
+    icon: Stethoscope,
+    name: "Healthcare",
+    description: "Automate patient scheduling, medical records management, and compliance reporting.",
+  },
+  {
+    icon: ShoppingCart,
+    name: "Retail & E-commerce",
+    description: "Enhance inventory management, order processing, and customer service operations.",
+  },
+  {
+    icon: Truck,
+    name: "Logistics",
+    description: "Optimize route planning, shipment tracking, and warehouse operations seamlessly.",
+  },
+  {
+    icon: Landmark,
+    name: "Financial Services",
+    description: "Automate transaction processing, risk assessment, and regulatory compliance.",
+  },
+]
 
 export function Industries() {
-  const { t } = useTranslation()
-  const industries = t.industries.items.map((item, index) => ({
-    ...item,
-    icon: icons[index],
-  }))
   return (
     <section id="industries" className="py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -18,13 +41,15 @@ export function Industries() {
           {/* Content */}
           <div>
             <p className="text-primary font-medium text-sm uppercase tracking-wider mb-3">
-              {t.industries.eyebrow}
+              Industries
             </p>
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
-              {t.industries.title}
+              Seeking Solutions Across Industries
             </h2>
             <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-              {t.industries.description}
+              Every industry has unique challenges and inefficiencies. I take the time 
+              to understand your specific pain points and build targeted solutions 
+              that address the root causes of operational friction.
             </p>
           </div>
 
