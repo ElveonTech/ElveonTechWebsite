@@ -50,10 +50,11 @@ export function Hero() {
           </div>
           
           {/* Right: Personal/Founder Section */}
-          <div className="space-y-6 lg:mt-0 mt-12 flex flex-col items-end">
-            {/* Photo */}
-            <div className="flex justify-end">
-              <div className="relative w-48 h-48 lg:w-56 lg:h-56 rounded-2xl overflow-hidden shadow-xl">
+          <div className="space-y-6 lg:mt-0 mt-12 lg:flex lg:flex-col lg:items-end">
+            {/* Mobile: Photo left, Quote right (side by side) */}
+            <div className="flex gap-4 items-center lg:hidden">
+              {/* Photo */}
+              <div className="relative w-32 h-32 rounded-2xl overflow-hidden shadow-xl flex-shrink-0">
                 <Image
                   src="/founder-photo.jpg"
                   alt="Founder"
@@ -62,14 +63,38 @@ export function Hero() {
                   priority
                 />
               </div>
+
+              {/* Quote */}
+              <div className="relative flex-1">
+                <Quote className="absolute -top-2 -left-2 w-5 h-5 text-primary/20" />
+                <p className="text-sm font-medium text-foreground italic pl-5">
+                  {t.founder.quote}
+                </p>
+              </div>
             </div>
 
-            {/* Quote */}
-            <div className="relative max-w-md">
-              <Quote className="absolute -top-2 -left-2 w-6 h-6 text-primary/20" />
-              <p className="text-base lg:text-lg font-medium text-foreground italic pl-6 lg:pl-8 text-right">
-                {t.founder.quote}
-              </p>
+            {/* Desktop: Photo and Quote stacked, right-aligned */}
+            <div className="hidden lg:flex lg:flex-col lg:items-end lg:space-y-6">
+              {/* Photo */}
+              <div className="flex justify-end">
+                <div className="relative w-56 h-56 rounded-2xl overflow-hidden shadow-xl">
+                  <Image
+                    src="/founder-photo.jpg"
+                    alt="Founder"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+
+              {/* Quote */}
+              <div className="relative max-w-md">
+                <Quote className="absolute -top-2 -left-2 w-6 h-6 text-primary/20" />
+                <p className="text-base lg:text-lg font-medium text-foreground italic pl-6 lg:pl-8 text-right">
+                  {t.founder.quote}
+                </p>
+              </div>
             </div>
           </div>
         </div>
