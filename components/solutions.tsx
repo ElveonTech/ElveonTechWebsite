@@ -9,7 +9,7 @@ export function Solutions() {
   const { t } = useLanguage()
   
   return (
-    <section id="solutions" className="py-20 lg:py-32 bg-secondary/30">
+    <section id="solutions" className="py-12 lg:py-20 bg-secondary/30">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">

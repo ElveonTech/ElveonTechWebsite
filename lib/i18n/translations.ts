@@ -9,12 +9,12 @@ export const translations = {
       getStarted: "Aan de slag"
     },
     hero: {
-      badge: "Intelligente Automatiseringsoplossingen",
-      title1: "Automatiseer Uw Bedrijf,",
-      title2: "Vergroot",
-      title3: "Uw Groei",
-      description: "Ik identificeer en los de meest urgente pijnpunten in uw industrie op, en bouw op maat gemaakte automatiseringsoplossingen die inefficiënties elimineren en meetbare resultaten opleveren.",
-      scheduleDemo: "Plan een Demo",
+      badge: "Krijg Uw Tijd Terug",
+      title1: "Geef Uw Tijd Niet Weg aan",
+      title2: "Repetitief Werk",
+      title3: "",
+      description: "Niets geeft mij meer voldoening dan mijn tijd inzetten om u een veelvoud daarvan terug te geven. Laat repetitieve taken verdwijnen, zodat u zich kunt richten op het werk dat er echt toe doet.",
+      scheduleDemo: "Plan een Gesprek",
       watchVideo: "Bekijk Video",
       automated: "Geautomatiseerd",
       processing: "Verwerken",
@@ -23,9 +23,9 @@ export const translations = {
       workflowRunning: "Automatisering loopt soepel"
     },
     solutions: {
-      badge: "Oplossingen",
-      title: "Uitgebreide Automatisering voor Elke Uitdaging",
-      description: "Van eenvoudige taakautomatisering tot complexe workflows, ik bouw oplossingen die inspelen op uw specifieke behoeften.",
+      badge: "Waar Verdwijnt Uw Tijd?",
+      title: "Laat Deze Taken Voor U Werken",
+      description: "Te veel kleine, repetitieve taken zorgen ervoor dat het vuur waarmee u ooit begon minder fel gaat branden. Dat vuur wil ik helpen terugbrengen.",
       items: [
         {
           title: "Procesautomatisering",
@@ -55,8 +55,8 @@ export const translations = {
     },
     industries: {
       badge: "Industries",
-      title: "Op Zoek naar Oplossingen in Diverse Industries",
-      description: "Elke industrie heeft unieke uitdagingen en inefficiënties. Ik neem de tijd om uw specifieke pijnpunten te begrijpen en bouw gerichte oplossingen die de grondoorzaken van operationele wrijving aanpakken.",
+      title: "Uw Tijd Verdient Beter",
+      description: "In elke industrie zie ik dezelfde patronen: waardevolle tijd die opgaat aan taken die niemand leuk vindt. Tijd die u kunt besteden aan wat echt belangrijk is - groeien, creëren, of bij de mensen zijn van wie u houdt.",
       items: [
         {
           name: "Productie",
@@ -85,27 +85,27 @@ export const translations = {
       ]
     },
     about: {
-      badge: "Over Elveon Tech",
-      title: "Het Oplossen van Échte Pijnpunten in de Industrie",
-      description1: "Elveon Tech is opgericht met een duidelijke missie: identificeren en oplossen van de meest urgente pijnpunten waar bedrijven in verschillende industrieën mee te maken hebben. Door direct met klanten samen te werken, ontdek ik de grondoorzaken van inefficiënties en bouw ik gerichte automatiseringsoplossingen die echte impact leveren.",
-      description2: "Als solo ondernemer breng ik een praktische, persoonlijke aanpak naar elk project. U werkt direct met mij van ontdekking tot oplevering, waardoor uw unieke uitdagingen met precisie en zorg worden begrepen en aangepakt.",
+      badge: "Mijn Filosofie",
+      title: "Uw Tijd Hoort bij U",
+      description1: "Tijd is een van de waardevolste dingen die je iemand kunt geven. Het idee dat ik een deel van mijn tijd kan inzetten om u structureel veel meer tijd terug te geven, is precies waar ik energie van krijg.",
+      description2: "Uw tijd hoort niet op te gaan aan het archiveren van e-mails, eindeloos zoeken naar dat ene bericht of terugkerende taken waar u geen voldoening uit haalt. U moet zich kunnen richten op het werk dat er echt toe doet - werk dat uitdaagt, uw bedrijf vooruithelpt, inkomsten genereert, of u simpelweg een goed gevoel geeft.",
       values: [
-        "Diepgaande analyse van pijnpunten",
-        "Op maat gemaakte automatiseringsoplossingen",
-        "Praktische, persoonlijke aanpak",
-        "Snelle iteratie en oplevering",
-        "Langetermijn partnerschapmentaliteit",
-        "Continue verbeteringsfocus"
+        "Focus op werk dat echt waarde toevoegt",
+        "Laat repetitief werk verdwijnen",
+        "Behoud uw vertrouwde manier van werken",
+        "Breng het vuur terug",
+        "Meer tijd voor creëren en groeien",
+        "Structurele tijdsbesparing"
       ],
-      problemSolver: "Probleemoplosser",
-      problemSolverDesc: "Het vinden van elegante oplossingen voor complexe uitdagingen",
+      problemSolver: "Tijdredder",
+      problemSolverDesc: "Uw tijd teruggeven door repetitief werk te laten verdwijnen",
       founderLed: "Oprichter-geleid",
       directCollaboration: "Directe samenwerking"
     },
     cta: {
-      title: "Klaar om Uw Bedrijfsoperaties te Transformeren?",
-      description: "Laten we uw specifieke uitdagingen bespreken en verkennen hoe automatisering kan helpen. Plan een gratis consultatie om te beginnen.",
-      getInTouch: "Neem Contact Op",
+      title: "Klaar om Uw Tijd Terug te Krijgen?",
+      description: "Laten we bespreken hoe u meer tijd kunt besteden aan creëren, groeien en leven. Plan een gratis gesprek.",
+      getInTouch: "Plan een Gesprek",
       reachDirectly: "Of neem direct contact met ons op via",
       email: "contact@elveontech.com"
     },
@@ -286,12 +286,12 @@ export const translations = {
       getStarted: "Get Started"
     },
     hero: {
-      badge: "Intelligent Automation Solutions",
-      title1: "Automate Your Business,",
-      title2: "Amplify",
-      title3: "Your Growth",
-      description: "I identify and solve the most pressing pain points in your industry, building tailored automation solutions that eliminate inefficiencies and drive measurable results.",
-      scheduleDemo: "Schedule a Demo",
+      badge: "Get Your Time Back",
+      title1: "Don't Give Your Time to",
+      title2: "Repetitive Work",
+      title3: "",
+      description: "Nothing gives me more satisfaction than investing my time to give you back a multiple of it. Let repetitive tasks disappear, so you can focus on the work that truly matters.",
+      scheduleDemo: "Schedule a Call",
       watchVideo: "Watch Video",
       automated: "Automated",
       processing: "Processing",
@@ -300,9 +300,9 @@ export const translations = {
       workflowRunning: "Automation running smoothly"
     },
     solutions: {
-      badge: "Solutions",
-      title: "Comprehensive Automation for Every Challenge",
-      description: "From simple task automation to more complex workflows, I build solutions that address your specific needs.",
+      badge: "Where Does Your Time Go?",
+      title: "Let These Tasks Work for You",
+      description: "Too many small, repetitive tasks cause the fire you once started with to burn less bright. I want to help bring that fire back.",
       items: [
         {
           title: "Process Automation",
@@ -332,8 +332,8 @@ export const translations = {
     },
     industries: {
       badge: "Industries",
-      title: "Seeking Solutions Across Industries",
-      description: "Every industry has unique challenges and inefficiencies. I take the time to understand your specific pain points and build targeted solutions that address the root causes of operational friction.",
+      title: "Your Time Deserves Better",
+      description: "In every industry, I see the same patterns: valuable time spent on tasks nobody enjoys. Time you could spend on what really matters - growing, creating, or being with the people you love.",
       items: [
         {
           name: "Manufacturing",
@@ -362,27 +362,27 @@ export const translations = {
       ]
     },
     about: {
-      badge: "About Elveon Tech",
-      title: "Solving Real Industry Pain Points",
-      description1: "Elveon Tech was founded with a clear mission: to identify and solve the most pressing pain points that businesses face across various industries. By working directly with clients, I uncover the root causes of inefficiencies and build targeted automation solutions that deliver real impact.",
-      description2: "As a solo founder, I bring a hands-on, personalized approach to every project. You work directly with me from discovery to delivery, ensuring your unique challenges are understood and addressed with precision and care.",
+      badge: "My Philosophy",
+      title: "Your Time Belongs to You",
+      description1: "Time is one of the most valuable things you can give someone. The idea that I can invest part of my time to structurally give you back much more, is exactly what energizes me.",
+      description2: "Your time shouldn't be spent archiving emails, endlessly searching for that one message, or on recurring tasks that don't fulfill you. You should be able to focus on work that truly matters - work that challenges you, moves your business forward, generates income, or simply makes you feel good.",
       values: [
-        "Deep industry pain point analysis",
-        "Tailored automation solutions",
-        "Hands-on, personalized approach",
-        "Rapid iteration and delivery",
-        "Long-term partnership mindset",
-        "Continuous improvement focus"
+        "Focus on work that adds real value",
+        "Make repetitive work disappear",
+        "Keep your trusted way of working",
+        "Bring back the fire",
+        "More time for creating and growing",
+        "Structural time savings"
       ],
-      problemSolver: "Problem Solver",
-      problemSolverDesc: "Finding elegant solutions for complex industry challenges",
+      problemSolver: "Time Saver",
+      problemSolverDesc: "Giving you back your time by making repetitive work disappear",
       founderLed: "Founder-Led",
       directCollaboration: "Direct collaboration"
     },
     cta: {
-      title: "Ready to Transform Your Business Operations?",
-      description: "Let's discuss your specific challenges and explore how automation can help. Schedule a free consultation to get started.",
-      getInTouch: "Get in Touch",
+      title: "Ready to Get Your Time Back?",
+      description: "Let's discuss how you can spend more time creating, growing, and living. Schedule a free call.",
+      getInTouch: "Schedule a Call",
       reachDirectly: "Or reach us directly at",
       email: "contact@elveontech.com"
     },

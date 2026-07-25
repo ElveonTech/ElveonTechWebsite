@@ -8,7 +8,7 @@ export function Hero() {
   const { t } = useLanguage()
   
   return (
-    <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+    <section className="relative pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden">
       {/* Subtle background accent */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/50 -skew-x-12 translate-x-1/4" />
       
@@ -23,7 +23,7 @@ export function Hero() {
             
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight text-balance">
               {t.hero.title1}{" "}
-              <span className="text-primary">{t.hero.title2}</span> {t.hero.title3}
+              <span className="text-primary">{t.hero.title2}</span>
             </h1>
             
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">

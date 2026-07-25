@@ -9,7 +9,7 @@ export function Industries() {
   const { t } = useLanguage()
   
   return (
-    <section id="industries" className="py-20 lg:py-32">
+    <section id="industries" className="py-12 lg:py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
