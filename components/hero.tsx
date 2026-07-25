@@ -1,9 +1,11 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Calculator } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { ArrowRight, Calculator, Quote } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 import Link from "next/link"
+import Image from "next/image"
 
 export function Hero() {
   const { t } = useLanguage()
@@ -14,8 +16,8 @@ export function Hero() {
       <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/50 -skew-x-12 translate-x-1/4" />
       
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Text Content */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Left: Hero Text Content */}
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
               <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
@@ -45,68 +47,49 @@ export function Hero() {
                 </a>
               </Button>
             </div>
-            
-
           </div>
           
-          {/* Visual Element */}
-          <div className="relative lg:justify-self-end">
-            <div className="relative w-full max-w-lg aspect-square">
-              {/* Main card */}
-              <div className="absolute inset-0 bg-card rounded-3xl border border-border shadow-xl overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-12 bg-muted flex items-center px-4 gap-2">
-                  <div className="w-3 h-3 rounded-full bg-destructive/50" />
-                  <div className="w-3 h-3 rounded-full bg-chart-4/50" />
-                  <div className="w-3 h-3 rounded-full bg-chart-2/50" />
-                </div>
-                <div className="pt-16 px-4 sm:px-6 pb-6">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <div className="w-5 h-5 rounded bg-primary" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="h-3 w-24 bg-muted rounded" />
-                        <div className="h-2 w-16 bg-muted rounded mt-2" />
-                      </div>
-                      <div className="text-xs text-primary font-medium flex-shrink-0">{t.hero.automated}</div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-chart-2/10 flex items-center justify-center flex-shrink-0">
-                        <div className="w-5 h-5 rounded bg-chart-2" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="h-3 w-32 bg-muted rounded" />
-                        <div className="h-2 w-20 bg-muted rounded mt-2" />
-                      </div>
-                      <div className="text-xs text-chart-2 font-medium flex-shrink-0">{t.hero.processing}</div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-chart-4/10 flex items-center justify-center flex-shrink-0">
-                        <div className="w-5 h-5 rounded bg-chart-4" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="h-3 w-28 bg-muted rounded" />
-                        <div className="h-2 w-14 bg-muted rounded mt-2" />
-                      </div>
-                      <div className="text-xs text-chart-4 font-medium flex-shrink-0">{t.hero.complete}</div>
-                    </div>
-                  </div>
-                  
-                  {/* Visual workflow indicator */}
-                  <div className="mt-8 p-4 rounded-xl bg-muted/50 border border-border">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                        <div className="w-3 h-3 rounded-full bg-primary" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-sm font-medium text-foreground">{t.hero.workflowActive}</div>
-                        <div className="text-xs text-muted-foreground">{t.hero.workflowRunning}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          {/* Right: Personal/Founder Section */}
+          <div className="space-y-8 lg:mt-0 mt-12">
+            {/* Header */}
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+              <Badge variant="outline" className="mb-3">
+                {t.founder.badge}
+              </Badge>
+              <h2 className="text-2xl lg:text-3xl font-bold tracking-tight">
+                {t.founder.name}
+              </h2>
+            </div>
+
+            {/* Quote */}
+            <div className="relative">
+              <Quote className="absolute -top-2 -left-2 w-6 h-6 text-primary/20" />
+              <p className="text-base lg:text-lg font-medium text-foreground italic pl-6 lg:pl-8">
+                {t.founder.quote}
+              </p>
+            </div>
+
+            {/* Photo */}
+            <div className="flex justify-center lg:justify-start">
+              <div className="relative w-64 h-64 lg:w-72 lg:h-72 rounded-2xl overflow-hidden shadow-xl">
+                <Image
+                  src="/founder-photo.jpg"
+                  alt="Founder"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
+            </div>
+
+            {/* Description */}
+            <div className="space-y-4">
+              <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
+                {t.founder.description}
+              </p>
+              <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
+                {t.founder.mission}
+              </p>
             </div>
           </div>
         </div>
