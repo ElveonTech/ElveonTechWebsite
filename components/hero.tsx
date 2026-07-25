@@ -50,28 +50,10 @@ export function Hero() {
           </div>
           
           {/* Right: Personal/Founder Section */}
-          <div className="space-y-8 lg:mt-0 mt-12">
-            {/* Header */}
-            <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-              <Badge variant="outline" className="mb-3">
-                {t.founder.badge}
-              </Badge>
-              <h2 className="text-2xl lg:text-3xl font-bold tracking-tight">
-                {t.founder.name}
-              </h2>
-            </div>
-
-            {/* Quote */}
-            <div className="relative">
-              <Quote className="absolute -top-2 -left-2 w-6 h-6 text-primary/20" />
-              <p className="text-base lg:text-lg font-medium text-foreground italic pl-6 lg:pl-8">
-                {t.founder.quote}
-              </p>
-            </div>
-
+          <div className="space-y-6 lg:mt-0 mt-12">
             {/* Photo */}
             <div className="flex justify-center lg:justify-start">
-              <div className="relative w-64 h-64 lg:w-72 lg:h-72 rounded-2xl overflow-hidden shadow-xl">
+              <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-2xl overflow-hidden shadow-xl">
                 <Image
                   src="/founder-photo.jpg"
                   alt="Founder"
@@ -82,13 +64,11 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Description */}
-            <div className="space-y-4">
-              <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
-                {t.founder.description}
-              </p>
-              <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
-                {t.founder.mission}
+            {/* Quote */}
+            <div className="relative">
+              <Quote className="absolute -top-2 -left-2 w-6 h-6 text-primary/20" />
+              <p className="text-base lg:text-lg font-medium text-foreground italic pl-6 lg:pl-8">
+                {t.founder.quote}
               </p>
             </div>
           </div>
