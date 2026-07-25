@@ -106,6 +106,7 @@ export const translations = {
     founder: {
       badge: "Persoonlijk",
       name: "Over Mij",
+      title: "Founder",
       quote: "Niets geeft mij meer voldoening dan mijn tijd inzetten om anderen een veelvoud daarvan terug te geven.",
       description: "Ik ben de oprichter van ElveonTech. Het idee dat ik een deel van mijn tijd kan inzetten en jou daar structureel veel meer tijd voor kan teruggeven, is precies waar ik energie van krijg. Die tijd kun je gebruiken om iets op te bouwen, je bedrijf te laten groeien, meer inkomen te creëren of bij de mensen te zijn van wie je houdt.",
       mission: "Te veel kleine, repetitieve taken kunnen ervoor zorgen dat het vuur waarmee je ooit begon langzaam minder fel gaat branden. Dat vuur wil ik helpen terugbrengen."
@@ -391,6 +392,7 @@ export const translations = {
     founder: {
       badge: "Personal",
       name: "About Me",
+      title: "Founder",
       quote: "Nothing gives me more satisfaction than investing my time to give others back a multiple of it.",
       description: "I'm the founder of ElveonTech. The idea that I can invest part of my time and structurally give you back much more, is exactly what energizes me. That time you can use to build something, grow your business, create more income, or be with the people you love.",
       mission: "Too many small, repetitive tasks can cause the fire you once started with to burn less bright. I want to help bring that fire back."
