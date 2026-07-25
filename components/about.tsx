@@ -1,15 +1,11 @@
-import { CheckCircle2 } from "lucide-react"
+"use client"
 
-const values = [
-  "Deep industry pain point analysis",
-  "Tailored automation solutions",
-  "Hands-on, personalized approach",
-  "Rapid iteration and delivery",
-  "Long-term partnership mindset",
-  "Continuous improvement focus",
-]
+import { CheckCircle2 } from "lucide-react"
+import { useLanguage } from "@/lib/i18n/language-context"
 
 export function About() {
+  const { t } = useLanguage()
+  
   return (
     <section id="about" className="py-20 lg:py-32 bg-secondary/30">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -23,10 +19,10 @@ export function About() {
                     <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-lg sm:rounded-xl" />
                   </div>
                   <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">
-                    Problem Solver
+                    {t.about.problemSolver}
                   </h3>
                   <p className="text-sm sm:text-base text-muted-foreground">
-                    Finding elegant solutions for complex industry challenges
+                    {t.about.problemSolverDesc}
                   </p>
                 </div>
               </div>
@@ -39,8 +35,8 @@ export function About() {
                   <span className="text-primary font-bold text-base lg:text-lg">1</span>
                 </div>
                 <div>
-                  <div className="font-semibold text-foreground text-sm lg:text-base">Founder-Led</div>
-                  <div className="text-xs lg:text-sm text-muted-foreground">Direct collaboration</div>
+                  <div className="font-semibold text-foreground text-sm lg:text-base">{t.about.founderLed}</div>
+                  <div className="text-xs lg:text-sm text-muted-foreground">{t.about.directCollaboration}</div>
                 </div>
               </div>
             </div>
@@ -49,26 +45,21 @@ export function About() {
           {/* Content */}
           <div className="order-1 lg:order-2">
             <p className="text-primary font-medium text-sm uppercase tracking-wider mb-3">
-              About Elveon Tech
+              {t.about.badge}
             </p>
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
-              Solving Real Industry Pain Points
+              {t.about.title}
             </h2>
             <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-              Elveon Tech was founded with a clear mission: to identify and solve the most 
-              pressing pain points that businesses face across various industries. By working 
-              directly with clients, I uncover the root causes of inefficiencies and build 
-              targeted automation solutions that deliver real impact.
+              {t.about.description1}
             </p>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              As a solo founder, I bring a hands-on, personalized approach to every project. 
-              You work directly with me from discovery to delivery, ensuring your unique 
-              challenges are understood and addressed with precision and care.
+              {t.about.description2}
             </p>
 
             {/* Values list */}
             <div className="mt-8 grid sm:grid-cols-2 gap-3">
-              {values.map((value) => (
+              {t.about.values.map((value) => (
                 <div key={value} className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
                   <span className="text-sm text-foreground">{value}</span>

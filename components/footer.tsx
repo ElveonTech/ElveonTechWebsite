@@ -1,32 +1,33 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { Linkedin, Twitter } from "lucide-react"
-
-const footerLinks = {
-  solutions: [
-    { name: "Process Automation", href: "#" },
-    { name: "Integration Platform", href: "#" },
-    { name: "Analytics Suite", href: "#" },
-    { name: "Compliance Tools", href: "#" },
-  ],
-  company: [
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
-  ],
-  resources: [
-    { name: "Documentation", href: "#" },
-    { name: "Case Studies", href: "#" },
-    { name: "Webinars", href: "#" },
-    { name: "Support", href: "#" },
-  ],
-  legal: [
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Delete Account", href: "/delete-account" },
-    { name: "Terms of Service", href: "#" },
-  ],
-}
+import { useLanguage } from "@/lib/i18n/language-context"
 
 export function Footer() {
+  const { t } = useLanguage()
+  
+  const footerLinks = {
+    solutions: t.footer.solutionLinks.map((name, i) => ({
+      name,
+      href: i === 0 ? "#" : "#"
+    })),
+    company: [
+      { name: t.footer.companyLinks[0], href: "#about" },
+      { name: t.footer.companyLinks[1], href: "#contact" },
+    ],
+    resources: t.footer.resourceLinks.map((name) => ({
+      name,
+      href: "#"
+    })),
+    legal: [
+      { name: t.footer.legalLinks[0], href: "/privacy" },
+      { name: t.footer.legalLinks[1], href: "/delete-account" },
+      { name: t.footer.legalLinks[2], href: "#" },
+    ],
+  }
+  
   return (
     <footer className="bg-foreground text-background">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
@@ -43,8 +44,7 @@ export function Footer() {
               />
             </Link>
             <p className="mt-4 text-background/60 text-sm leading-relaxed max-w-xs">
-              Building intelligent automation solutions that transform how businesses 
-              operate and grow.
+              {t.footer.tagline}
             </p>
             <div className="mt-6 flex gap-4">
               <a 
@@ -68,7 +68,7 @@ export function Footer() {
 
           {/* Solutions */}
           <div>
-            <h3 className="font-semibold text-background mb-4">Solutions</h3>
+            <h3 className="font-semibold text-background mb-4">{t.footer.solutions}</h3>
             <ul className="space-y-3">
               {footerLinks.solutions.map((link) => (
                 <li key={link.name}>
@@ -85,7 +85,7 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="font-semibold text-background mb-4">Company</h3>
+            <h3 className="font-semibold text-background mb-4">{t.footer.company}</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
@@ -102,7 +102,7 @@ export function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="font-semibold text-background mb-4">Resources</h3>
+            <h3 className="font-semibold text-background mb-4">{t.footer.resources}</h3>
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
@@ -121,7 +121,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-16 pt-8 border-t border-background/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-background/60">
-            &copy; {new Date().getFullYear()} Elveon Tech. All rights reserved.
+            &copy; {new Date().getFullYear()} Elveon Tech. {t.footer.copyright}
           </p>
           <div className="flex gap-6">
             {footerLinks.legal.map((link) => (

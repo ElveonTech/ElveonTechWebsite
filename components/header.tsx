@@ -5,16 +5,20 @@ import Image from "next/image"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-
-const navLinks = [
-  { href: "#solutions", label: "Solutions" },
-  { href: "#industries", label: "Industries" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
-]
+import { useLanguage } from "@/lib/i18n/language-context"
+import { LanguageSwitcher } from "@/components/language-switcher"
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { t } = useLanguage()
+
+  const navLinks = [
+    { href: "#solutions", label: t.header.solutions },
+    { href: "#industries", label: t.header.industries },
+    { href: "#about", label: t.header.about },
+    { href: "/time-savings", label: t.header.timeSavings },
+    { href: "#contact", label: t.header.contact },
+  ]
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -45,9 +49,10 @@ export function Header() {
             ))}
           </nav>
 
-          {/* CTA Button */}
+          {/* CTA Button & Language Switcher */}
           <div className="hidden md:flex items-center gap-4">
-            <Button size="sm">Get Started</Button>
+            <LanguageSwitcher />
+            <Button size="sm">{t.header.getStarted}</Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -80,7 +85,8 @@ export function Header() {
               </Link>
             ))}
             <div className="flex flex-col gap-2 pt-4 border-t border-border">
-              <Button size="sm">Get Started</Button>
+              <LanguageSwitcher />
+              <Button size="sm">{t.header.getStarted}</Button>
             </div>
           </nav>
         </div>
