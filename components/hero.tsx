@@ -1,8 +1,9 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Play } from "lucide-react"
+import { ArrowRight, Calculator } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
+import Link from "next/link"
 
 export function Hero() {
   const { t } = useLanguage()
@@ -31,13 +32,17 @@ export function Hero() {
             </p>
             
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="gap-2">
-                {t.hero.scheduleDemo}
-                <ArrowRight className="w-4 h-4" />
+              <Button size="lg" className="gap-2" asChild>
+                <Link href="/time-savings">
+                  <Calculator className="w-4 h-4" />
+                  {t.hero.calculateSavings}
+                </Link>
               </Button>
-              <Button variant="outline" size="lg" className="gap-2">
-                <Play className="w-4 h-4" />
-                {t.hero.watchVideo}
+              <Button variant="outline" size="lg" className="gap-2" asChild>
+                <a href="mailto:contact@elveontech.com">
+                  {t.hero.scheduleCall}
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </Button>
             </div>
             
