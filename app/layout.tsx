@@ -10,23 +10,25 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: 'Elveon Tech | Intelligent Process Automation',
   description: 'Elveon Tech develops cutting-edge software solutions to automate and optimize processes across industries. Transform your business with intelligent automation.',
-  generator: 'v0.app',
   icons: {
     icon: [
       {
+        url: '/et-logo-new.png',
+        type: 'image/png',
+      },
+      {
         url: '/icon-light-32x32.png',
         media: '(prefers-color-scheme: light)',
+        sizes: '32x32',
       },
       {
         url: '/icon-dark-32x32.png',
         media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        sizes: '32x32',
       },
     ],
     apple: '/apple-icon.png',
+    shortcut: '/et-logo-new.png',
   },
 }
 
