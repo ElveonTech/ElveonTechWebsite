@@ -11,7 +11,7 @@ export function Hero() {
   const { t } = useLanguage()
   
   return (
-    <section className="relative pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden">
+    <section className="relative pt-20 pb-12 lg:pt-28 lg:pb-16 overflow-hidden">
       {/* Subtle background accent */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/50 -skew-x-12 translate-x-1/4" />
       
@@ -33,19 +33,21 @@ export function Hero() {
               {t.hero.description}
             </p>
             
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="gap-2" asChild>
+            <div className="mt-8 flex flex-col gap-4">
+              <Button size="lg" className="gap-2 text-lg py-7 shadow-xl hover:shadow-2xl transition-all bg-primary hover:bg-primary/90 hover:scale-105" asChild>
                 <Link href="/time-savings">
-                  <Calculator className="w-4 h-4" />
+                  <Calculator className="w-5 h-5" />
                   {t.hero.calculateSavings}
                 </Link>
               </Button>
-              <Button variant="outline" size="lg" className="gap-2" asChild>
-                <a href="mailto:contact@elveontech.com">
-                  {t.hero.scheduleCall}
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button variant="outline" size="lg" className="gap-2" asChild>
+                  <a href="mailto:contact@elveontech.com">
+                    {t.hero.scheduleCall}
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
           

@@ -10,6 +10,48 @@ import { useSearchParams, useRouter } from "next/navigation"
 import { Clock, CheckCircle2, Mail, Phone, ArrowRight, Users, Euro, Calculator } from "lucide-react"
 import Link from "next/link"
 
+// Custom time values: 5, 10, 15, 30, 45 min, 1h, then 30min increments to 3h, then 1h increments to 8h
+const TIME_VALUES = [
+  0.083,  // 5 min
+  0.167,  // 10 min
+  0.25,   // 15 min
+  0.5,    // 30 min
+  0.75,   // 45 min
+  1,      // 1 hour
+  1.5,    // 1.5 hours
+  2,      // 2 hours
+  2.5,    // 2.5 hours
+  3,      // 3 hours
+  4,      // 4 hours
+  5,      // 5 hours
+  6,      // 6 hours
+  7,      // 7 hours
+  8,      // 8 hours
+  9       // 8+ hours (represented as 9 internally)
+]
+
+const formatTimeValue = (hours: number) => {
+  if (hours >= 9) return "8+ uur"
+  if (hours >= 1) return `${hours} uur`
+  const minutes = Math.round(hours * 60)
+  return `${minutes} min`
+}
+
+const findClosestIndex = (value: number) => {
+  let closestIndex = 0
+  let minDiff = Math.abs(TIME_VALUES[0] - value)
+  
+  for (let i = 1; i < TIME_VALUES.length; i++) {
+    const diff = Math.abs(TIME_VALUES[i] - value)
+    if (diff < minDiff) {
+      minDiff = diff
+      closestIndex = i
+    }
+  }
+  
+  return closestIndex
+}
+
 function TimeSavingsResultContent() {
   const { t } = useLanguage()
   const searchParams = useSearchParams()
@@ -17,18 +59,22 @@ function TimeSavingsResultContent() {
   
   const initialCategory = searchParams.get("category") || "email"
   const initialHours = parseFloat(searchParams.get("hours") || "1")
+  const initialPeople = parseInt(searchParams.get("people") || "1")
   
   const [category, setCategory] = useState(initialCategory)
-  const [hoursPerDay, setHoursPerDay] = useState(initialHours)
-  const [numberOfPeople, setNumberOfPeople] = useState(1)
+  const [sliderIndex, setSliderIndex] = useState(findClosestIndex(initialHours))
+  const [numberOfPeople, setNumberOfPeople] = useState(initialPeople)
+
+  const hoursPerDay = TIME_VALUES[sliderIndex]
 
   // Update URL when category or hours change
   useEffect(() => {
     const params = new URLSearchParams()
     params.set("category", category)
     params.set("hours", hoursPerDay.toString())
+    params.set("people", numberOfPeople.toString())
     router.replace(`/time-savings/result?${params.toString()}`, { scroll: false })
-  }, [category, hoursPerDay, router])
+  }, [category, hoursPerDay, numberOfPeople, router])
 
   // Calculate savings (assuming 70% automation efficiency)
   const automationEfficiency = 0.7
@@ -64,9 +110,9 @@ function TimeSavingsResultContent() {
   return (
     <>
       <Header />
-      <main className="pt-24 pb-20">
+      <main className="pt-16 pb-20">
         {/* Hero Section with Results */}
-        <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-background py-20 lg:py-32 mb-20">
+        <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-background pt-12 lg:pt-16 pb-8 lg:pb-12 mb-12">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
@@ -85,8 +131,75 @@ function TimeSavingsResultContent() {
               </p>
             </div>
 
+            {/* Stats Cards */}
+            <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-12">
+              {/* Time Savings */}
+              <div className="bg-card p-6 rounded-2xl border border-border">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <Clock className="w-5 h-5 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {t.timeSavingsResult.totalTimeSaved}
+                    </h3>
+                  </div>
+                  <span className="text-sm text-muted-foreground">per jaar</span>
+                </div>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">
+                      {Math.round(totalSavedHoursPerYear)}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {t.timeSavingsResult.hours}
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">
+                      {totalSavedWorkDays}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {t.timeSavingsResult.days}
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">
+                      {totalSavedWeeks}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {t.timeSavingsResult.weeks}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Money Savings */}
+              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-6 rounded-2xl border border-green-500/20">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
+                    <Euro className="w-5 h-5 text-green-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {t.timeSavingsResult.totalMoneySaved}
+                  </h3>
+                </div>
+                <div className="text-4xl lg:text-5xl font-bold text-green-600 mb-2">
+                  {formatCurrency(totalSavedMoneyPerYear)}
+                </div>
+                <div className="text-xs text-muted-foreground mb-4">
+                  {t.timeSavingsResult.perYearLabel}
+                </div>
+                <div className="pt-4 border-t border-green-500/20">
+                  <p className="text-xs text-muted-foreground">
+                    {t.timeSavingsResult.basedOn} {t.timeSavingsResult.avgCostPerHour}
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Adjustment Sliders */}
-            <div className="max-w-4xl mx-auto space-y-6 mb-12">
+            <div className="max-w-4xl mx-auto space-y-6">
               {/* Hours per day slider */}
               <div className="p-6 lg:p-8 rounded-2xl border-2 border-border bg-card">
                 <div className="flex items-center justify-between mb-6">
@@ -99,22 +212,22 @@ function TimeSavingsResultContent() {
                     </label>
                   </div>
                   <div className="text-3xl font-bold text-primary">
-                    {hoursPerDay} <span className="text-base font-normal text-muted-foreground">{t.timeSavings.hoursPerDay}</span>
+                    {formatTimeValue(hoursPerDay)}
                   </div>
                 </div>
 
                 <Slider
-                  value={[hoursPerDay]}
-                  onValueChange={(value) => setHoursPerDay(value[0])}
-                  min={0.5}
-                  max={8}
-                  step={0.5}
+                  value={[sliderIndex]}
+                  onValueChange={(value) => setSliderIndex(value[0])}
+                  min={0}
+                  max={TIME_VALUES.length - 1}
+                  step={1}
                   className="mb-2"
                 />
 
                 <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                  <span>0.5</span>
-                  <span>8</span>
+                  <span>5 min</span>
+                  <span>8+ uur</span>
                 </div>
               </div>
 
@@ -148,73 +261,6 @@ function TimeSavingsResultContent() {
                 <div className="flex justify-between text-sm text-muted-foreground mt-2">
                   <span>1</span>
                   <span>50</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Stats Cards */}
-            <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-              {/* Time Savings */}
-              <div className="bg-card p-6 rounded-2xl border border-border">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {t.timeSavingsResult.totalTimeSaved}
-                  </h3>
-                </div>
-                <div className="grid grid-cols-3 gap-4">
-                  <div>
-                    <div className="text-2xl lg:text-3xl font-bold text-primary mb-1">
-                      {Math.round(totalSavedHoursPerYear)}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {t.timeSavingsResult.hours}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-2xl lg:text-3xl font-bold text-primary mb-1">
-                      {totalSavedWorkDays}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {t.timeSavingsResult.days}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-2xl lg:text-3xl font-bold text-primary mb-1">
-                      {totalSavedWeeks}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {t.timeSavingsResult.weeks}
-                    </div>
-                  </div>
-                </div>
-                <div className="text-xs text-muted-foreground mt-4">
-                  {t.timeSavingsResult.perYearLabel}
-                </div>
-              </div>
-
-              {/* Money Savings */}
-              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-6 rounded-2xl border border-green-500/20">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
-                    <Euro className="w-5 h-5 text-green-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {t.timeSavingsResult.totalMoneySaved}
-                  </h3>
-                </div>
-                <div className="text-4xl lg:text-5xl font-bold text-green-600 mb-2">
-                  {formatCurrency(totalSavedMoneyPerYear)}
-                </div>
-                <div className="text-xs text-muted-foreground mb-4">
-                  {t.timeSavingsResult.perYearLabel}
-                </div>
-                <div className="pt-4 border-t border-green-500/20">
-                  <p className="text-xs text-muted-foreground">
-                    {t.timeSavingsResult.basedOn} {t.timeSavingsResult.avgCostPerHour}
-                  </p>
                 </div>
               </div>
             </div>

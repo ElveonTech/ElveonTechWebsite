@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Calculator } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { LanguageSwitcher } from "@/components/language-switcher"
 
@@ -13,11 +13,12 @@ export function Header() {
   const { t } = useLanguage()
 
   const navLinks = [
-    { href: "#solutions", label: t.header.solutions },
-    { href: "#industries", label: t.header.industries },
-    { href: "#about", label: t.header.about },
-    { href: "/time-savings", label: t.header.timeSavings },
-    { href: "#contact", label: t.header.contact },
+    { href: "/time-savings", label: t.header.timeSavings, icon: true },
+    { href: "/#solutions", label: t.header.solutions },
+    { href: "/#industries", label: t.header.industries },
+    { href: "/#about", label: t.header.about },
+    { href: "/faq", label: t.header.faq },
+    { href: "/#contact", label: t.header.contact },
   ]
 
   return (
@@ -43,8 +44,9 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+                className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium flex items-center gap-1.5"
               >
+                {link.icon && <Calculator className="w-4 h-4" />}
                 {link.label}
               </Link>
             ))}
@@ -79,9 +81,10 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium py-2"
+                className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium py-2 flex items-center gap-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
+                {link.icon && <Calculator className="w-4 h-4" />}
                 {link.label}
               </Link>
             ))}

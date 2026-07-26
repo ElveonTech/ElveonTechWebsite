@@ -6,15 +6,45 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
 import { useLanguage } from "@/lib/i18n/language-context"
-import { Calculator, Clock, ChevronDown } from "lucide-react"
+import { Calculator, Clock, ChevronDown, Users } from "lucide-react"
 import { useRouter } from "next/navigation"
+
+// Custom time values: 5, 10, 15, 30, 45 min, 1h, then 30min increments to 3h, then 1h increments to 8h
+const TIME_VALUES = [
+  0.083,  // 5 min
+  0.167,  // 10 min
+  0.25,   // 15 min
+  0.5,    // 30 min
+  0.75,   // 45 min
+  1,      // 1 hour
+  1.5,    // 1.5 hours
+  2,      // 2 hours
+  2.5,    // 2.5 hours
+  3,      // 3 hours
+  4,      // 4 hours
+  5,      // 5 hours
+  6,      // 6 hours
+  7,      // 7 hours
+  8,      // 8 hours
+  9       // 8+ hours (represented as 9 internally)
+]
+
+const formatTimeValue = (hours: number) => {
+  if (hours >= 9) return "8+ uur"
+  if (hours >= 1) return `${hours} uur`
+  const minutes = Math.round(hours * 60)
+  return `${minutes} min`
+}
 
 export default function TimeSavingsPage() {
   const { t } = useLanguage()
   const router = useRouter()
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const [hoursPerDay, setHoursPerDay] = useState(1)
+  const [sliderIndex, setSliderIndex] = useState(5) // Default to 1 hour (index 5)
+  const [numberOfPeople, setNumberOfPeople] = useState(1)
   const [showSlider, setShowSlider] = useState(false)
+
+  const hoursPerDay = TIME_VALUES[sliderIndex]
 
   useEffect(() => {
     if (selectedCategory) {
@@ -33,7 +63,7 @@ export default function TimeSavingsPage() {
 
   const handleCalculate = () => {
     if (selectedCategory) {
-      router.push(`/time-savings/result?category=${selectedCategory}&hours=${hoursPerDay}`)
+      router.push(`/time-savings/result?category=${selectedCategory}&hours=${hoursPerDay}&people=${numberOfPeople}`)
     }
   }
 
@@ -77,8 +107,9 @@ export default function TimeSavingsPage() {
           {showSlider && (
             <div 
               id="slider-section"
-              className={`mb-6 ${selectedCategory ? 'md:hidden' : 'hidden'}`}
+              className={`mb-6 space-y-4 ${selectedCategory ? 'md:hidden' : 'hidden'}`}
             >
+              {/* Hours slider - Mobile */}
               <div className="p-6 rounded-2xl border-2 border-primary bg-card shadow-lg">
                 <div className="mb-4">
                   <div className="flex items-center justify-between mb-2">
@@ -86,34 +117,64 @@ export default function TimeSavingsPage() {
                       {t.timeSavings.currentlySpend}
                     </label>
                     <div className="text-2xl font-bold text-primary">
-                      {hoursPerDay} <span className="text-sm font-normal text-muted-foreground">{t.timeSavings.hoursPerDay}</span>
+                      {formatTimeValue(hoursPerDay)}
                     </div>
                   </div>
                 </div>
 
                 <Slider
-                  value={[hoursPerDay]}
-                  onValueChange={(value) => setHoursPerDay(value[0])}
-                  min={0.5}
-                  max={8}
-                  step={0.5}
+                  value={[sliderIndex]}
+                  onValueChange={(value) => setSliderIndex(value[0])}
+                  min={0}
+                  max={TIME_VALUES.length - 1}
+                  step={1}
                   className="mb-2"
                 />
 
-                <div className="flex justify-between text-xs text-muted-foreground mt-2 mb-4">
-                  <span>0.5 uur</span>
-                  <span>8 uur</span>
+                <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                  <span>5 min</span>
+                  <span>8+ uur</span>
+                </div>
+              </div>
+
+              {/* Team size slider - Mobile */}
+              <div className="p-6 rounded-2xl border-2 border-border bg-card shadow-lg">
+                <div className="mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-base font-semibold text-foreground">
+                      Aantal medewerkers
+                    </label>
+                    <div className="text-2xl font-bold text-primary">
+                      {numberOfPeople} <span className="text-sm font-normal text-muted-foreground">
+                        {numberOfPeople === 1 ? 'persoon' : 'personen'}
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
-                <Button
-                  size="lg"
-                  onClick={handleCalculate}
-                  className="w-full gap-2"
-                >
-                  <Calculator className="w-5 h-5" />
-                  {t.timeSavings.calculate}
-                </Button>
+                <Slider
+                  value={[numberOfPeople]}
+                  onValueChange={(value) => setNumberOfPeople(value[0])}
+                  min={1}
+                  max={50}
+                  step={1}
+                  className="mb-2"
+                />
+
+                <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                  <span>1</span>
+                  <span>50</span>
+                </div>
               </div>
+
+              <Button
+                size="lg"
+                onClick={handleCalculate}
+                className="w-full gap-2"
+              >
+                <Calculator className="w-5 h-5" />
+                {t.timeSavings.calculate}
+              </Button>
             </div>
           )}
 
@@ -133,8 +194,8 @@ export default function TimeSavingsPage() {
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                     <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                   </div>
-                  <div className="px-2 sm:px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
-                    {category.avgSavings}
+                  <div className="px-2 sm:px-3 py-1 rounded-full bg-green-500/10 text-green-600 text-xs font-medium border border-green-500/20">
+                    Bespaar {category.avgSavings}
                   </div>
                 </div>
                 <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1 sm:mb-2">
@@ -153,40 +214,88 @@ export default function TimeSavingsPage() {
           </div>
 
           {/* Slider Section - Desktop */}
-          <div className="hidden md:block max-w-3xl mx-auto mb-8">
-            <div
-              className={`p-8 rounded-2xl border-2 transition-all ${
-                selectedCategory
-                  ? "border-border bg-card"
-                  : "border-border bg-muted/50 opacity-50"
-              }`}
-            >
-              <div className="flex items-center justify-between mb-6">
-                <label className="text-lg font-semibold text-foreground">
-                  {selectedCategory
-                    ? t.timeSavings.currentlySpend
-                    : t.timeSavings.selectCategory}
-                </label>
+          <div className="hidden md:block max-w-6xl mx-auto mb-8">
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Hours per day card */}
+              <div
+                className={`p-8 rounded-2xl border-2 transition-all ${
+                  selectedCategory
+                    ? "border-border bg-card"
+                    : "border-border bg-muted/50 opacity-50"
+                }`}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Clock className="w-5 h-5 text-primary" />
+                  </div>
+                  <label className="text-lg font-semibold text-foreground">
+                    {selectedCategory
+                      ? t.timeSavings.currentlySpend
+                      : t.timeSavings.selectCategory}
+                  </label>
+                </div>
+
                 {selectedCategory && (
-                  <div className="text-3xl font-bold text-primary">
-                    {hoursPerDay} <span className="text-base font-normal text-muted-foreground">{t.timeSavings.hoursPerDay}</span>
+                  <div className="text-3xl font-bold text-primary mb-6">
+                    {formatTimeValue(hoursPerDay)}
                   </div>
                 )}
+
+                <Slider
+                  disabled={!selectedCategory}
+                  value={[sliderIndex]}
+                  onValueChange={(value) => setSliderIndex(value[0])}
+                  min={0}
+                  max={TIME_VALUES.length - 1}
+                  step={1}
+                  className="mb-2"
+                />
+
+                <div className="flex justify-between text-sm text-muted-foreground mt-2">
+                  <span>5 min</span>
+                  <span>8+ uur</span>
+                </div>
               </div>
 
-              <Slider
-                disabled={!selectedCategory}
-                value={[hoursPerDay]}
-                onValueChange={(value) => setHoursPerDay(value[0])}
-                min={0.5}
-                max={8}
-                step={0.5}
-                className="mb-2"
-              />
+              {/* Team size card */}
+              <div
+                className={`p-8 rounded-2xl border-2 transition-all ${
+                  selectedCategory
+                    ? "border-border bg-card"
+                    : "border-border bg-muted/50 opacity-50"
+                }`}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Users className="w-5 h-5 text-primary" />
+                  </div>
+                  <label className="text-lg font-semibold text-foreground">
+                    Aantal medewerkers
+                  </label>
+                </div>
 
-              <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                <span>0.5</span>
-                <span>8</span>
+                {selectedCategory && (
+                  <div className="text-3xl font-bold text-primary mb-6">
+                    {numberOfPeople} <span className="text-base font-normal text-muted-foreground">
+                      {numberOfPeople === 1 ? 'persoon' : 'personen'}
+                    </span>
+                  </div>
+                )}
+
+                <Slider
+                  disabled={!selectedCategory}
+                  value={[numberOfPeople]}
+                  onValueChange={(value) => setNumberOfPeople(value[0])}
+                  min={1}
+                  max={50}
+                  step={1}
+                  className="mb-2"
+                />
+
+                <div className="flex justify-between text-sm text-muted-foreground mt-2">
+                  <span>1</span>
+                  <span>50</span>
+                </div>
               </div>
             </div>
           </div>

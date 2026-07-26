@@ -5,6 +5,7 @@ export const translations = {
       industries: "Industries",
       about: "Over Ons",
       timeSavings: "Tijd Besparen",
+      faq: "FAQ",
       contact: "Contact",
       getStarted: "Aan de slag"
     },
@@ -148,7 +149,7 @@ export const translations = {
     },
     timeSavings: {
       title: "Hoeveel Tijd Kunt U Besparen?",
-      subtitle: "Ontdek hoeveel tijd uw team kan besparen door repetitieve taken te automatiseren",
+      subtitle: "Ontdek hoeveel tijd uw team kan besparen door taken net iets slimmer aan te pakken",
       selectCategory: "Selecteer een categorie om te berekenen",
       hoursPerDay: "uur per dag",
       currentlySpend: "Hoeveel tijd besteedt u hier momenteel dagelijks aan?",
@@ -194,9 +195,9 @@ export const translations = {
     },
     timeSavingsResult: {
       workDays: "werkdagen",
-      perYear: "per jaar",
+      perYear: "per jaar besparen",
       headline: "U kunt tot",
-      subheadline: "besparen door deze taak te automatiseren",
+      subheadline: "door deze taak iets slimmer te doen",
       adjustTeamSize: "Pas het aantal personen in uw team aan",
       adjustHours: "Pas de uren per dag aan",
       people: "personen",
@@ -283,6 +284,45 @@ export const translations = {
           ]
         }
       }
+    },
+    faq: {
+      badge: "Veelgestelde Vragen",
+      title: "Veelgestelde Vragen",
+      subtitle: "Vind antwoorden op de meest gestelde vragen over automatisering en onze diensten",
+      questions: [
+        {
+          question: "Wat is procesautomatisering precies?",
+          answer: "Procesautomatisering is het inzetten van technologie om repetitieve taken en processen zonder menselijke tussenkomst uit te voeren. Dit kan variëren van eenvoudige e-mail notificaties tot complexe workflows die meerdere systemen met elkaar verbinden. Het doel is om tijd te besparen, fouten te verminderen en uw team te laten focussen op werk dat echt waarde toevoegt."
+        },
+        {
+          question: "Voor welke bedrijven is automatisering geschikt?",
+          answer: "Automatisering is geschikt voor vrijwel elk bedrijf dat repetitieve taken uitvoert. Of u nu een klein bedrijf bent met 5 medewerkers of een grote organisatie met 500+ werknemers - als er taken zijn die regelmatig terugkomen, kunnen we die waarschijnlijk automatiseren. We werken met bedrijven in diverse sectoren zoals retail, logistiek, zorg, financiën en professionele dienstverlening."
+        },
+        {
+          question: "Hoeveel kost een automatiseringsproject?",
+          answer: "De kosten variëren sterk afhankelijk van de complexiteit van het proces en het aantal systemen dat moet worden geïntegreerd. Eenvoudige automatiseringen kunnen beginnen vanaf €2.500, terwijl complexere projecten meer kunnen kosten. We beginnen altijd met een gratis analyse waarin we de haalbaarheid en verwachte ROI berekenen. Veel van onze klanten verdienen hun investering binnen 6-12 maanden terug door tijdsbesparing."
+        },
+        {
+          question: "Hoe lang duurt het om een automatisering te implementeren?",
+          answer: "Dit hangt af van de complexiteit. Eenvoudige automatiseringen kunnen binnen 1-2 weken live zijn, terwijl meer uitgebreide projecten 4-8 weken kunnen duren. We werken altijd in sprints, zodat u snel resultaat ziet en we onderweg kunnen bijsturen. In ons eerste gesprek kunnen we u een realistische inschatting geven voor uw specifieke situatie."
+        },
+        {
+          question: "Wat gebeurt er als mijn proces verandert?",
+          answer: "Dat is geen probleem! We bouwen flexibele oplossingen die makkelijk aan te passen zijn. Kleine wijzigingen kunnen vaak binnen een dag worden doorgevoerd. Voor grotere aanpassingen bieden we onderhoudscontracten aan, maar veel van onze klanten kunnen met de juiste documentatie ook zelf wijzigingen doorvoeren. We zorgen altijd voor een goede kennisoverdracht."
+        },
+        {
+          question: "Welke systemen kunnen jullie koppelen?",
+          answer: "We kunnen vrijwel alle moderne systemen met elkaar verbinden - van populaire tools zoals Gmail, Excel, en Slack tot maatwerksoftware en legacy systemen. We werken met standaard API's waar mogelijk, en kunnen ook custom integraties bouwen als dat nodig is. Tijdens de analysefase bekijken we welke systemen u gebruikt en hoe we die het beste kunnen integreren."
+        },
+        {
+          question: "Is mijn data veilig?",
+          answer: "Absoluut. We nemen beveiliging zeer serieus. Alle data wordt versleuteld tijdens transport en opslag. We werken alleen met betrouwbare cloudproviders die voldoen aan strenge beveiligingsstandaarden (ISO 27001, SOC 2). Gevoelige gegevens kunnen ook volledig binnen uw eigen infrastructuur blijven als dat gewenst is. We tekenen altijd een geheimhoudingsverklaring en zijn AVG-compliant."
+        },
+        {
+          question: "Hebben jullie support beschikbaar als er iets misgaat?",
+          answer: "Ja, we bieden verschillende supportopties. Voor al onze klanten is er een support kanaal waar vragen binnen 24 uur worden beantwoord. Voor kritieke processen bieden we uitgebreidere SLA's met snellere responstijden. Bovendien monitoren we proactief alle automatiseringen en krijgt u automatisch een melding als er iets onverwachts gebeurt, vaak nog voordat u het zelf merkt."
+        }
+      ]
     }
   },
   en: {
@@ -291,6 +331,7 @@ export const translations = {
       industries: "Industries",
       about: "About",
       timeSavings: "Time Savings",
+      faq: "FAQ",
       contact: "Contact",
       getStarted: "Get Started"
     },
@@ -569,6 +610,45 @@ export const translations = {
           ]
         }
       }
+    },
+    faq: {
+      badge: "Frequently Asked Questions",
+      title: "Frequently Asked Questions",
+      subtitle: "Find answers to the most common questions about automation and our services",
+      questions: [
+        {
+          question: "What exactly is process automation?",
+          answer: "Process automation is using technology to execute repetitive tasks and processes without human intervention. This can range from simple email notifications to complex workflows connecting multiple systems. The goal is to save time, reduce errors, and let your team focus on work that truly adds value."
+        },
+        {
+          question: "Which companies is automation suitable for?",
+          answer: "Automation is suitable for virtually any company that performs repetitive tasks. Whether you're a small business with 5 employees or a large organization with 500+ workers - if there are regularly recurring tasks, we can likely automate them. We work with companies across various sectors including retail, logistics, healthcare, finance, and professional services."
+        },
+        {
+          question: "How much does an automation project cost?",
+          answer: "Costs vary greatly depending on the complexity of the process and the number of systems that need to be integrated. Simple automations can start from €2,500, while more complex projects may cost more. We always begin with a free analysis where we calculate feasibility and expected ROI. Many of our clients recoup their investment within 6-12 months through time savings."
+        },
+        {
+          question: "How long does it take to implement an automation?",
+          answer: "This depends on complexity. Simple automations can go live within 1-2 weeks, while more extensive projects may take 4-8 weeks. We always work in sprints, so you see results quickly and we can adjust along the way. In our first conversation, we can give you a realistic estimate for your specific situation."
+        },
+        {
+          question: "What happens if my process changes?",
+          answer: "That's not a problem! We build flexible solutions that are easy to adapt. Small changes can often be implemented within a day. For larger adjustments, we offer maintenance contracts, but many of our clients can make changes themselves with proper documentation. We always ensure good knowledge transfer."
+        },
+        {
+          question: "Which systems can you connect?",
+          answer: "We can connect virtually all modern systems - from popular tools like Gmail, Excel, and Slack to custom software and legacy systems. We work with standard APIs where possible, and can also build custom integrations when needed. During the analysis phase, we review which systems you use and how to best integrate them."
+        },
+        {
+          question: "Is my data secure?",
+          answer: "Absolutely. We take security very seriously. All data is encrypted during transport and storage. We only work with reliable cloud providers that meet strict security standards (ISO 27001, SOC 2). Sensitive data can also remain entirely within your own infrastructure if desired. We always sign an NDA and are GDPR compliant."
+        },
+        {
+          question: "Do you have support available if something goes wrong?",
+          answer: "Yes, we offer various support options. For all our clients, there's a support channel where questions are answered within 24 hours. For critical processes, we offer more extensive SLAs with faster response times. Additionally, we proactively monitor all automations and you automatically receive a notification if something unexpected happens, often before you notice it yourself."
+        }
+      ]
     }
   }
 } as const
