@@ -24,24 +24,24 @@ export function Hero() {
               {t.hero.badge}
             </div>
             
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight text-balance">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight text-balance">
               {t.hero.title1}{" "}
               <span className="text-primary">{t.hero.title2}</span>
             </h1>
             
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+            <p className="mt-6 text-base sm:text-lg text-muted-foreground leading-relaxed">
               {t.hero.description}
             </p>
             
             <div className="mt-8 flex flex-col gap-4">
-              <Button size="lg" className="gap-2 text-lg py-7 shadow-xl hover:shadow-2xl transition-all bg-primary hover:bg-primary/90 hover:scale-105" asChild>
+              <Button size="lg" className="gap-2 text-base sm:text-lg py-6 sm:py-7 shadow-xl hover:shadow-2xl transition-all bg-primary hover:bg-primary/90 hover:scale-105 w-full sm:w-auto" asChild>
                 <Link href="/time-savings">
-                  <Calculator className="w-5 h-5" />
-                  {t.hero.calculateSavings}
+                  <Calculator className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-sm sm:text-base">{t.hero.calculateSavings}</span>
                 </Link>
               </Button>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button variant="outline" size="lg" className="gap-2" asChild>
+                <Button variant="outline" size="lg" className="gap-2 w-full sm:w-auto" asChild>
                   <a href="mailto:contact@elveontech.com">
                     {t.hero.scheduleCall}
                     <ArrowRight className="w-4 h-4" />
