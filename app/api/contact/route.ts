@@ -136,8 +136,8 @@ export async function POST(request: NextRequest) {
     `
 
     // Get email configuration from environment
-    const fromEmail = process.env.RESEND_FROM_EMAIL || 'ElveonTech <noreply@elveontech.nl>'
-    const toEmail = process.env.RESEND_TO_EMAIL || 'contact@elveontech.nl'
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'ElveonTech <contact@elveontech.nl>'
+    const toEmail = process.env.RESEND_TO_EMAIL || 'jurre@elveontech.nl'
 
     // Send email using Resend
     const { data, error } = await sendContactEmail({
