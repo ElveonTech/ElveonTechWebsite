@@ -11,9 +11,9 @@ export function Hero() {
   const { t } = useLanguage()
   
   return (
-    <section className="relative pt-20 pb-12 lg:pt-28 lg:pb-16 overflow-hidden">
-      {/* Subtle background accent */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/50 -skew-x-12 translate-x-1/4" />
+    <section className="relative pt-20 pb-12 lg:pt-28 lg:pb-16 overflow-x-hidden">
+      {/* Subtle background accent - hidden on mobile */}
+      <div className="hidden lg:block absolute top-0 right-0 w-1/2 h-full bg-secondary/50 -skew-x-12 translate-x-1/4" />
       
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
