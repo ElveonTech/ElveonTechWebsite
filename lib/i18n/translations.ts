@@ -25,9 +25,9 @@ export const translations = {
       workflowRunning: "Automatisering loopt soepel"
     },
     solutions: {
-      badge: "Waar Verdwijnt Uw Tijd?",
-      title: "Laat Deze Taken Voor U Werken",
-      description: "Wij helpen u focus terug te krijgen. Te veel kleine, repetitieve taken zorgen ervoor dat het vuur minder fel gaat branden. Wij brengen dat vuur terug.",
+      badge: "Waar verlies je tijd?",
+      title: "Elke dag 15 minuten kwijt? Dat is meer dan 6 werkdagen per jaar.",
+      description: "Wij helpen je de tijd terug te krijgen die je nu verliest aan taken die je vuur minder fel laten branden. Wat jij met die tijd doet, is aan jou. Of je nu meer **klanten binnenhaalt**, **aan jezelf werkt** of tijd doorbrengt met de mensen die belangrijk voor je zijn. Wij weten in ieder geval wat wij met onze tijd doen: die investeren we weer in jou, zodat we je steeds meer tijd kunnen teruggeven.",
       items: [
         {
           title: "Procesautomatisering",
@@ -52,6 +52,39 @@ export const translations = {
         {
           title: "Maatwerk Ontwikkeling",
           description: "Elk bedrijf is anders. Ik bouw op maat gemaakte oplossingen die passen bij uw specifieke workflows en uitdagingen."
+        }
+      ]
+    },
+    process: {
+      badge: "Ons Proces",
+      title: "Van proces naar ",
+      titleHighlight: "resultaat.",
+      subtitle: "Een helder 4-stappenplan dat zorgt voor maximale impact met minimale inspanning.",
+      scrollHint: "Scroll horizontaal om alle stappen te zien",
+      timeEstimate: "± 30 minuten",
+      bottomMessage: "Transparant, resultaatgericht en altijd met focus op uw team en doelen.",
+      bottomMessageHighlight: "",
+      bottomMessageEnd: "",
+      steps: [
+        {
+          number: "01",
+          title: "Wij lopen samen uw proces door",
+          description: "We leren uw huidige werkwijze kennen en identificeren waar tijd verloren gaat en waar automatisering het meeste verschil maakt."
+        },
+        {
+          number: "02",
+          title: "Droomscenario vaststellen",
+          description: "We schetsen samen hoe uw ideale werkproces eruitziet en bepalen wat automatisering voor u kan betekenen."
+        },
+        {
+          number: "03",
+          title: "Kant-en-klare implementatie",
+          description: "We bouwen, testen en implementeren uw automatisering volledig gebruiksklaar. Direct inzetbaar in uw dagelijkse proces."
+        },
+        {
+          number: "04",
+          title: "Winst meten & Feedback",
+          description: "We meten de impact, verzamelen uw feedback en optimaliseren waar nodig om het maximale uit uw automatisering te halen."
         }
       ]
     },
@@ -158,7 +191,7 @@ export const translations = {
         {
           id: "email",
           title: "E-mail Verwerking",
-          description: "Sorteren, categoriseren en reageren op e-mails",
+          description: "Archiveren, zoeken en reageren op e-mails",
           avgSavings: "120 uur/jaar"
         },
         {
@@ -169,14 +202,14 @@ export const translations = {
         },
         {
           id: "reporting",
-          title: "Rapportage",
-          description: "Verzamelen en samenstellen van rapporten",
+          title: "Google Automatisering",
+          description: "Google Ads, Google Analytics en Google Workspace",
           avgSavings: "150 uur/jaar"
         },
         {
           id: "invoicing",
-          title: "Factuurverwerking",
-          description: "Verwerken en goedkeuren van facturen",
+          title: "Data Analyse & Insights",
+          description: "Excel rapporten, Power BI dashboards en data-inzichten",
           avgSavings: "100 uur/jaar"
         },
         {
@@ -187,9 +220,9 @@ export const translations = {
         },
         {
           id: "document-management",
-          title: "Documentbeheer",
-          description: "Archiveren en organiseren van documenten",
-          avgSavings: "90 uur/jaar"
+          title: "Overig",
+          description: "Automatisering bespaart gemiddeld 75% van je tijd",
+          avgSavings: "75% besparing"
         }
       ]
     },
@@ -244,23 +277,23 @@ export const translations = {
           ]
         },
         reporting: {
-          title: "Geautomatiseerde Rapportage",
-          description: "Genereer rapporten automatisch op basis van realtime data uit uw systemen. Van simpele dagelijkse overzichten tot complexe maandelijkse analyses - we automatiseren het hele proces inclusief dataverzameling, analyse en distributie.",
+          title: "Google Automatisering",
+          description: "Bespaar tijd op Google Ads campagnes, Analytics rapporten en Workspace taken. We automatiseren je Google-workflows: van automatische bid-aanpassingen en prestatierapporten tot het synchroniseren van data tussen Google tools. Krijg meer uit je Google stack zonder de dagelijkse handmatige arbeid.",
           benefits: [
-            "Realtime dashboards en rapportages",
-            "Automatische data-aggregatie uit meerdere bronnen",
-            "Gepersonaliseerde rapporten per ontvanger",
-            "Geautomatiseerde distributie via e-mail of portal"
+            "Geautomatiseerde Google Ads optimalisatie en rapportage",
+            "Automatische Google Analytics insights en dashboards",
+            "Google Workspace automatiseringen (Sheets, Docs, Gmail)",
+            "Integratie tussen Google tools en andere systemen"
           ]
         },
         invoicing: {
-          title: "Factuurverwerking Automatisering",
-          description: "Stroomlijn uw hele factuurproces van ontvangst tot goedkeuring en betaling. Onze oplossing leest facturen automatisch in, matcht ze met bestellingen, routeert ze naar de juiste goedkeurders en kan zelfs betalingen initiëren.",
+          title: "Geautomatiseerde Data Analyse & Insights",
+          description: "Stop met handmatig Excel-bestanden updaten of rapporten samenstellen. We automatiseren je data-analyse en creëren interactieve dashboards die realtime inzichten geven. Van eenvoudige Excel-automatiseringen tot geavanceerde Power BI rapporten - jouw data vertelt eindelijk het verhaal dat je nodig hebt, zonder handmatig werk.",
           benefits: [
-            "Automatische factuurherkenning en data-extractie",
-            "Intelligente matching met inkooporders",
-            "Geautomatiseerde goedkeuringsworkflows",
-            "Integratie met boekhoudpakketten"
+            "Automatische data-verzameling uit meerdere bronnen",
+            "Interactieve Power BI dashboards en Excel rapporten",
+            "Realtime inzichten zonder handmatige updates",
+            "Gepersonaliseerde rapportages per afdeling of stakeholder"
           ]
         },
         "customer-service": {
@@ -274,13 +307,13 @@ export const translations = {
           ]
         },
         "document-management": {
-          title: "Document Management Systeem",
-          description: "Organiseer, archiveer en vind documenten moeiteloos met ons slimme document management systeem. Automatische categorisering, full-text search en compliance-ready archivering maken het beheren van documenten een fluitje van een cent.",
+          title: "Overige Automatiseringen",
+          description: "Naast veelvoorkomende taken helpen we ook met maatwerk automatiseringen. Research toont aan dat automatisering gemiddeld 75% tijdsbesparing oplevert bij verschillende bedrijfsprocessen. Of het nu gaat om scheduling, data synchronisatie, notificaties of andere repetitieve taken - we bouwen de oplossing die bij jouw workflow past.",
           benefits: [
-            "Automatische categorisering en tagging",
-            "Geavanceerde zoekfunctionaliteit met OCR",
-            "Versiebeheer en audit trails",
-            "Compliance-ready archivering"
+            "Gemiddeld 75% tijdsbesparing op geautomatiseerde processen",
+            "Maatwerk oplossingen voor jouw specifieke workflow",
+            "Integratie met bestaande systemen en tools",
+            "Schaalbare automatiseringen die meegroeien met je bedrijf"
           ]
         }
       }
@@ -351,9 +384,9 @@ export const translations = {
       workflowRunning: "Automation running smoothly"
     },
     solutions: {
-      badge: "Where Does Your Time Go?",
-      title: "Let These Tasks Work for You",
-      description: "We help you regain focus. Too many small, repetitive tasks cause the fire to burn less bright. We bring that fire back.",
+      badge: "Where do you lose time?",
+      title: "Losing 15 minutes every day? That's more than 6 work days per year.",
+      description: "We help you reclaim the time you're currently losing on tasks that dim your fire. What you do with that time is up to you. Whether you **bring in more clients**, **work on yourself**, or spend time with the people who matter most. We know what we do with our time: we invest it back in you, so we can give you even more time back.",
       items: [
         {
           title: "Process Automation",
@@ -378,6 +411,39 @@ export const translations = {
         {
           title: "Custom Development",
           description: "Every business is different. I build tailored solutions that fit your specific workflows and challenges."
+        }
+      ]
+    },
+    process: {
+      badge: "Our Process",
+      title: "From process to ",
+      titleHighlight: "results.",
+      subtitle: "A clear 4-step plan that ensures maximum impact with minimal effort.",
+      scrollHint: "Scroll horizontally to see all steps",
+      timeEstimate: "± 30 minutes",
+      bottomMessage: "Transparent, results-oriented and always focused on your team and goals.",
+      bottomMessageHighlight: "",
+      bottomMessageEnd: "",
+      steps: [
+        {
+          number: "01",
+          title: "We walk through your process",
+          description: "We get to know your current workflow and identify where time is lost and where automation makes the biggest difference."
+        },
+        {
+          number: "02",
+          title: "Define Dream Scenario",
+          description: "Together we outline what your ideal workflow looks like and determine what automation can mean for you."
+        },
+        {
+          number: "03",
+          title: "Ready-to-use Implementation",
+          description: "We build, test and implement your automation fully ready to use. Directly deployable in your daily process."
+        },
+        {
+          number: "04",
+          title: "Measure Results & Feedback",
+          description: "We measure the impact, collect your feedback and optimize where needed to get the maximum out of your automation."
         }
       ]
     },
@@ -484,7 +550,7 @@ export const translations = {
         {
           id: "email",
           title: "Email Processing",
-          description: "Sorting, categorizing and responding to emails",
+          description: "Archiving, searching and responding to emails",
           avgSavings: "120 hours/year"
         },
         {
@@ -495,14 +561,14 @@ export const translations = {
         },
         {
           id: "reporting",
-          title: "Reporting",
-          description: "Gathering and compiling reports",
+          title: "Google Automation",
+          description: "Google Ads, Google Analytics and Google Workspace",
           avgSavings: "150 hours/year"
         },
         {
           id: "invoicing",
-          title: "Invoice Processing",
-          description: "Processing and approving invoices",
+          title: "Data Analysis & Insights",
+          description: "Excel reports, Power BI dashboards and data insights",
           avgSavings: "100 hours/year"
         },
         {
@@ -513,9 +579,9 @@ export const translations = {
         },
         {
           id: "document-management",
-          title: "Document Management",
-          description: "Archiving and organizing documents",
-          avgSavings: "90 hours/year"
+          title: "Other",
+          description: "Automation saves an average of 75% of your time",
+          avgSavings: "75% savings"
         }
       ]
     },
@@ -570,23 +636,23 @@ export const translations = {
           ]
         },
         reporting: {
-          title: "Automated Reporting",
-          description: "Generate reports automatically based on real-time data from your systems. From simple daily overviews to complex monthly analyses - we automate the entire process including data collection, analysis and distribution.",
+          title: "Google Automation",
+          description: "Save time on Google Ads campaigns, Analytics reports, and Workspace tasks. We automate your Google workflows: from automatic bid adjustments and performance reports to syncing data between Google tools. Get more from your Google stack without the daily manual labor.",
           benefits: [
-            "Real-time dashboards and reports",
-            "Automatic data aggregation from multiple sources",
-            "Personalized reports per recipient",
-            "Automated distribution via email or portal"
+            "Automated Google Ads optimization and reporting",
+            "Automatic Google Analytics insights and dashboards",
+            "Google Workspace automations (Sheets, Docs, Gmail)",
+            "Integration between Google tools and other systems"
           ]
         },
         invoicing: {
-          title: "Invoice Processing Automation",
-          description: "Streamline your entire invoice process from receipt to approval and payment. Our solution automatically reads invoices, matches them with orders, routes them to the right approvers and can even initiate payments.",
+          title: "Automated Data Analysis & Insights",
+          description: "Stop manually updating Excel files or compiling reports. We automate your data analysis and create interactive dashboards that provide real-time insights. From simple Excel automations to advanced Power BI reports - your data finally tells the story you need, without manual work.",
           benefits: [
-            "Automatic invoice recognition and data extraction",
-            "Intelligent matching with purchase orders",
-            "Automated approval workflows",
-            "Integration with accounting packages"
+            "Automatic data collection from multiple sources",
+            "Interactive Power BI dashboards and Excel reports",
+            "Real-time insights without manual updates",
+            "Personalized reports per department or stakeholder"
           ]
         },
         "customer-service": {
@@ -600,13 +666,13 @@ export const translations = {
           ]
         },
         "document-management": {
-          title: "Document Management System",
-          description: "Organize, archive and find documents effortlessly with our smart document management system. Automatic categorization, full-text search and compliance-ready archiving make managing documents a breeze.",
+          title: "Other Automations",
+          description: "Beyond common tasks, we help with custom automation solutions. Research shows that automation delivers an average of 75% time savings across various business processes. Whether it's scheduling, data synchronization, notifications, or other repetitive tasks - we build the solution that fits your workflow.",
           benefits: [
-            "Automatic categorization and tagging",
-            "Advanced search functionality with OCR",
-            "Version control and audit trails",
-            "Compliance-ready archiving"
+            "Average 75% time savings on automated processes",
+            "Custom solutions tailored to your specific workflow",
+            "Integration with existing systems and tools",
+            "Scalable automations that grow with your business"
           ]
         }
       }

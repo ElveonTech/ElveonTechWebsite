@@ -20,7 +20,9 @@ export function Solutions() {
             {t.solutions.title}
           </h2>
           <p className="mt-4 text-muted-foreground text-lg">
-            {t.solutions.description}
+            {t.solutions.description.split('**').map((part, index) => 
+              index % 2 === 1 ? <strong key={index} className="font-semibold text-foreground">{part}</strong> : part
+            )}
           </p>
         </div>
 
