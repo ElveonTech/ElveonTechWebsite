@@ -5,6 +5,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
+import { ContactForm } from "@/components/contact-form"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Clock, CheckCircle2, Mail, Phone, ArrowRight, Users, Euro, Calculator } from "lucide-react"
@@ -64,9 +65,6 @@ function TimeSavingsResultContent() {
   const [category, setCategory] = useState(initialCategory)
   const [sliderIndex, setSliderIndex] = useState(findClosestIndex(initialHours))
   const [numberOfPeople, setNumberOfPeople] = useState(initialPeople)
-  const [showComment, setShowComment] = useState(false)
-  const [commentValue, setCommentValue] = useState("")
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
 
   const hoursPerDay = TIME_VALUES[sliderIndex]
 
@@ -113,28 +111,6 @@ function TimeSavingsResultContent() {
   return (
     <>
       <Header />
-      
-      {/* Success Message Notification */}
-      {showSuccessMessage && (
-        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-500">
-          <div className="bg-green-500 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 max-w-md mx-4">
-            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-              <CheckCircle2 className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="font-semibold mb-1">Bedankt voor je interesse!</p>
-              <p className="text-sm text-white/90">We nemen zo snel mogelijk contact met je op.</p>
-            </div>
-            <button
-              onClick={() => setShowSuccessMessage(false)}
-              className="ml-2 text-white/80 hover:text-white transition-colors"
-            >
-              <span className="text-2xl leading-none">×</span>
-            </button>
-          </div>
-        </div>
-      )}
-      
       <main className="pt-16 pb-20">
         {/* Hero Section with Results */}
         <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-background pt-12 lg:pt-16 pb-8 lg:pb-12 mb-12">
@@ -323,117 +299,14 @@ function TimeSavingsResultContent() {
             {/* Contact Form - Central CTA */}
             <div className="lg:sticky lg:top-24 h-fit">
               <div className="bg-primary rounded-3xl p-8 lg:p-10 text-primary-foreground shadow-2xl">
-                <h3 className="text-2xl lg:text-3xl font-bold mb-4">
-                  Laat je interesse zien
-                </h3>
-                <p className="text-primary-foreground/80 text-lg mb-8">
-                  Vul je gegevens in en wij nemen zo snel mogelijk contact met je op.
-                </p>
-
-                <form className="space-y-4" onSubmit={(e) => {
-                  e.preventDefault()
-                  const formData = new FormData(e.currentTarget)
-                  const email = formData.get('email')
-                  const phone = formData.get('phone')
-                  const comment = formData.get('comment')
-                  
-                  // TODO: Implement actual form submission logic
-                  console.log({ email, phone, comment, category, hoursPerDay, numberOfPeople })
-                  
-                  // Show success message
-                  setShowSuccessMessage(true)
-                  e.currentTarget.reset()
-                  setShowComment(false)
-                  setCommentValue("")
-                  
-                  // Hide message after 5 seconds
-                  setTimeout(() => {
-                    setShowSuccessMessage(false)
-                  }, 5000)
-                }}>
-                  {/* Email */}
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-white text-foreground border-2 border-transparent focus:border-primary/20 focus:outline-none transition-colors"
-                      placeholder="jouw@email.nl"
-                    />
-                  </div>
-
-                  {/* Phone */}
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                      Telefoonnummer *
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-white text-foreground border-2 border-transparent focus:border-primary/20 focus:outline-none transition-colors"
-                      placeholder="+31 6 12345678"
-                    />
-                  </div>
-
-                  {/* Comment - conditionally shown */}
-                  {showComment && (
-                    <div className="animate-in fade-in slide-in-from-top-2 duration-300">
-                      <div className="flex items-center justify-between mb-2">
-                        <label htmlFor="comment" className="block text-sm font-medium">
-                          Opmerking (optioneel)
-                        </label>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setShowComment(false)
-                            setCommentValue("")
-                          }}
-                          className="text-xs text-primary-foreground/60 hover:text-primary-foreground transition-colors flex items-center gap-1"
-                        >
-                          <span className="text-lg leading-none">×</span>
-                          <span>Verwijderen</span>
-                        </button>
-                      </div>
-                      <textarea
-                        id="comment"
-                        name="comment"
-                        rows={3}
-                        value={commentValue}
-                        onChange={(e) => setCommentValue(e.target.value)}
-                        className="w-full px-4 py-3 rounded-lg bg-white text-foreground border-2 border-transparent focus:border-primary/20 focus:outline-none transition-colors resize-none"
-                        placeholder="Vertel ons waar we je mee kunnen helpen..."
-                      />
-                    </div>
-                  )}
-
-                  {/* Add comment button */}
-                  {!showComment && (
-                    <button
-                      type="button"
-                      onClick={() => setShowComment(true)}
-                      className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors flex items-center gap-2"
-                    >
-                      <span className="text-lg">+</span>
-                      Opmerking toevoegen (optioneel)
-                    </button>
-                  )}
-
-                  <Button 
-                    type="submit"
-                    size="lg" 
-                    variant="secondary"
-                    className="w-full gap-2 bg-white text-primary hover:bg-white/90"
-                  >
-                    <Mail className="w-5 h-5" />
-                    Verstuur aanvraag
-                  </Button>
-                </form>
+                <ContactForm 
+                  variant="primary"
+                  context={{
+                    category,
+                    hoursPerDay,
+                    numberOfPeople
+                  }}
+                />
 
                 <div className="mt-6 pt-6 border-t border-primary-foreground/20 text-center">
                   <p className="text-sm text-primary-foreground/60 mb-3">
