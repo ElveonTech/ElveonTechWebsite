@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,42 +16,46 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Build email content
-    let emailContent = `
-Nieuwe contactaanvraag via website
+    // Build email HTML content
+    let emailHtml = `
+      <h2>Nieuwe contactaanvraag via website</h2>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Telefoonnummer:</strong> ${phone}</p>
+    `
 
-Email: ${email}
-Telefoonnummer: ${phone}
-${comment ? `\nOpmerking:\n${comment}` : ''}
-`
+    if (comment) {
+      emailHtml += `
+        <p><strong>Opmerking:</strong></p>
+        <p>${comment}</p>
+      `
+    }
 
     // Add context if available
     if (context) {
-      emailContent += `\n\nContext informatie:`
-      if (context.category) emailContent += `\nCategorie: ${context.category}`
-      if (context.hoursPerDay) emailContent += `\nUren per dag: ${context.hoursPerDay}`
-      if (context.numberOfPeople) emailContent += `\nAantal personen: ${context.numberOfPeople}`
+      emailHtml += `<h3>Context informatie</h3><ul>`
+      if (context.category) emailHtml += `<li><strong>Categorie:</strong> ${context.category}</li>`
+      if (context.hoursPerDay) emailHtml += `<li><strong>Uren per dag:</strong> ${context.hoursPerDay}</li>`
+      if (context.numberOfPeople) emailHtml += `<li><strong>Aantal personen:</strong> ${context.numberOfPeople}</li>`
+      emailHtml += `</ul>`
     }
 
-    // For now, log the email content
-    // TODO: Implement actual email sending with a service like SendGrid, Resend, or Nodemailer
-    console.log('Email to send:', {
-      to: 'contact@elveontech.nl',
+    // Send email using Resend
+    const data = await resend.emails.send({
+      from: 'ElveonTech Website <onboarding@resend.dev>', // Use verified domain in production
+      to: ['contact@elveontech.nl'],
       subject: 'Nieuwe contactaanvraag',
-      content: emailContent
+      html: emailHtml,
+      replyTo: email,
     })
 
-    // Simulate email sending
-    // In production, replace this with actual email sending logic
-    
     return NextResponse.json(
-      { message: 'Contact request received successfully' },
+      { message: 'Contact request sent successfully', id: data.id },
       { status: 200 }
     )
   } catch (error) {
     console.error('Error processing contact request:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Failed to send contact request' },
       { status: 500 }
     )
   }
