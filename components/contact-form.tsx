@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Mail, CheckCircle2 } from "lucide-react"
 
@@ -26,6 +26,7 @@ export function ContactForm({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessMessage, setShowSuccessMessage] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+  const formRef = useRef<HTMLFormElement>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -49,20 +50,35 @@ export function ContactForm({
         body: JSON.stringify(data),
       })
 
+      const result = await response.json()
+
       if (!response.ok) {
-        throw new Error('Failed to send message')
+        // Use server error message if available
+        throw new Error(result.error || 'Failed to send message')
       }
 
       setShowSuccessMessage(true)
-      e.currentTarget.reset()
+      
+      // Reset form using ref instead of e.currentTarget
+      if (formRef.current) {
+        formRef.current.reset()
+      }
+      
       setShowComment(false)
       setCommentValue("")
       
       setTimeout(() => {
         setShowSuccessMessage(false)
       }, 5000)
-    } catch (error) {
-      setErrorMessage('Er ging iets mis. Probeer het opnieuw of neem direct contact op via email.')
+    } catch (error: any) {
+      // Display specific error message
+      const message = error.message || 'Er ging iets mis. Probeer het opnieuw of neem direct contact op via email.'
+      setErrorMessage(message)
+      
+      // Auto-hide error after 10 seconds
+      setTimeout(() => {
+        setErrorMessage("")
+      }, 10000)
     } finally {
       setIsSubmitting(false)
     }
@@ -103,7 +119,7 @@ export function ContactForm({
           {description}
         </p>
 
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        <form ref={formRef} className="space-y-4" onSubmit={handleSubmit}>
           {/* Email */}
           <div>
             <label htmlFor="email" className={`block text-sm font-medium mb-2 ${labelColor}`}>
