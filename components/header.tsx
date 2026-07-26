@@ -14,7 +14,6 @@ export function Header() {
 
   const navLinks = [
     { href: "/time-savings", label: t.header.timeSavings, icon: true },
-    { href: "/#solutions", label: t.header.solutions },
     { href: "/#industries", label: t.header.industries },
     { href: "/#about", label: t.header.about },
     { href: "/faq", label: t.header.faq },

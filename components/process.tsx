@@ -1,6 +1,6 @@
 "use client"
 
-import { GitBranch, Target, Rocket, BarChart3, Clock, Shield } from "lucide-react"
+import { GitBranch, Target, Rocket, BarChart3, Clock, Shield, TrendingUp } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 
 const processIcons = [GitBranch, Target, Rocket, BarChart3]
@@ -9,7 +9,7 @@ export function Process() {
   const { t } = useLanguage()
   
   return (
-    <section id="process" className="py-12 lg:py-20 bg-gradient-to-b from-secondary/10 to-background">
+    <section id="process" className="pt-6 lg:pt-8 pb-12 lg:pb-20 bg-gradient-to-b from-secondary/10 to-background">
       <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -19,7 +19,7 @@ export function Process() {
           </p>
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
             {t.process.title}
-            <span className="text-primary">{t.process.titleHighlight}</span>
+            {t.process.titleHighlight && <span className="text-primary">{t.process.titleHighlight}</span>}
           </h2>
           <p className="text-muted-foreground text-lg">
             {t.process.subtitle}
@@ -29,14 +29,14 @@ export function Process() {
         {/* Steps Container - Horizontally scrollable on mobile */}
         <div className="relative mb-12">
           <div className="overflow-x-auto pb-4 -mx-6 px-6 lg:mx-0 lg:px-0 scrollbar-hide">
-            <div className="flex gap-6 lg:grid lg:grid-cols-4 lg:gap-6 min-w-max lg:min-w-0">
+            <div className="flex gap-6 lg:grid lg:grid-cols-4 lg:gap-6 min-w-max lg:min-w-0 lg:items-stretch">
               {t.process.steps.map((step, index) => {
                 const Icon = processIcons[index]
                 const isLast = index === t.process.steps.length - 1
                 return (
-                  <div key={step.number} className="flex items-center gap-0">
-                    <div className="flex-shrink-0 w-[300px] lg:w-full">
-                      <div className="bg-white border border-border rounded-2xl p-8 transition-all duration-300 hover:shadow-lg hover:border-primary/30 flex flex-col min-h-[380px] relative">
+                  <div key={step.number} className="flex items-stretch gap-0">
+                    <div className="flex-shrink-0 w-[300px] lg:w-full h-full">
+                      <div className="bg-white border border-border rounded-2xl p-8 transition-all duration-300 hover:shadow-lg hover:border-primary/30 flex flex-col h-full relative">
                         {/* Number - top left with transparent circle */}
                         <div className={`absolute top-6 left-6 w-16 h-16 rounded-full ${isLast ? 'bg-emerald-500/10' : 'bg-primary/10'} flex items-center justify-center`}>
                           <span className={`text-3xl font-bold leading-none ${isLast ? 'text-emerald-500' : 'text-primary'}`}>
@@ -62,9 +62,17 @@ export function Process() {
                         
                         {/* Time estimate for first step */}
                         {index === 0 && (
-                          <div className="flex items-center justify-center gap-2 mt-4 text-primary font-medium text-sm">
+                          <div className="flex items-center justify-center gap-2 mt-4 text-primary font-medium text-sm bg-primary/10 rounded-full px-4 py-2">
                             <Clock className="w-4 h-4" />
                             {t.process.timeEstimate}
+                          </div>
+                        )}
+                        
+                        {/* Savings estimate for last step */}
+                        {isLast && (
+                          <div className="flex items-center justify-center gap-2 mt-4 text-emerald-500 font-medium text-sm bg-emerald-500/10 rounded-full px-4 py-2">
+                            <TrendingUp className="w-4 h-4" />
+                            Bespaar 150+ uur per jaar
                           </div>
                         )}
                       </div>
@@ -79,7 +87,7 @@ export function Process() {
                           viewBox="0 0 40 20"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="text-primary"
+                          className={index === t.process.steps.length - 2 ? "text-emerald-500" : "text-primary"}
                         >
                           <path
                             d="M0 10H35M35 10L30 5M35 10L30 15"
@@ -119,11 +127,33 @@ export function Process() {
         </div>
         
         {/* Bottom message with shield icon */}
-        <div className="flex items-center justify-center gap-3 text-muted-foreground text-base lg:text-lg">
+        <div className="flex items-center justify-center gap-3 text-muted-foreground text-base lg:text-lg mb-8">
           <Shield className="w-5 h-5 text-primary flex-shrink-0" />
           <p className="text-center">
             {t.process.bottomMessage}
           </p>
+        </div>
+        
+        {/* CTA Button */}
+        <div className="flex justify-center">
+          <a 
+            href="#contact" 
+            className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+          >
+            Plan een gratis gesprek
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="w-5 h-5" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
         </div>
       </div>
     </section>

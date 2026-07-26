@@ -57,8 +57,8 @@ export const translations = {
     },
     process: {
       badge: "Ons Proces",
-      title: "Van proces naar ",
-      titleHighlight: "resultaat.",
+      title: "Tijdbesparing ",
+      titleHighlight: "Zonder Gedoe.",
       subtitle: "Een helder 4-stappenplan dat zorgt voor maximale impact met minimale inspanning.",
       scrollHint: "Scroll horizontaal om alle stappen te zien",
       timeEstimate: "± 30 minuten",
@@ -416,8 +416,8 @@ export const translations = {
     },
     process: {
       badge: "Our Process",
-      title: "From process to ",
-      titleHighlight: "results.",
+      title: "Time Savings ",
+      titleHighlight: "Without Hassle.",
       subtitle: "A clear 4-step plan that ensures maximum impact with minimal effort.",
       scrollHint: "Scroll horizontally to see all steps",
       timeEstimate: "± 30 minutes",
