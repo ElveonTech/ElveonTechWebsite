@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
-
-// Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY)
+import { sendContactEmail } from '@/lib/send-email'
 
 // Email validation regex
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -143,20 +140,24 @@ export async function POST(request: NextRequest) {
     const toEmail = process.env.RESEND_TO_EMAIL || 'contact@elveontech.nl'
 
     // Send email using Resend
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await sendContactEmail({
       from: fromEmail,
-      to: [toEmail],
+      to: toEmail,
       subject: `🔔 Nieuwe contactaanvraag${context?.category ? ` - ${context.category}` : ''}`,
       html: emailHtml,
       replyTo: email,
-      tags: [
-        { name: 'category', value: 'contact-form' },
-        { name: 'source', value: 'website' }
-      ]
     })
 
     if (error) {
       console.error('Resend API error:', error)
+
+      if (error.message?.includes('domain is not verified')) {
+        return NextResponse.json(
+          { error: 'Email domein is nog niet geverifieerd. Wacht tot DNS records zijn goedgekeurd in Resend.' },
+          { status: 500 }
+        )
+      }
+
       return NextResponse.json(
         { error: error.message || 'Fout bij verzenden van aanvraag' },
         { status: 500 }
