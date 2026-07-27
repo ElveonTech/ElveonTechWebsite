@@ -1,93 +1,13 @@
 "use client"
 
-import { useEffect, useRef } from "react"
 import { GitBranch, Target, Rocket, BarChart3, Clock, Shield, TrendingUp } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 
 const processIcons = [GitBranch, Target, Rocket, BarChart3]
-const LG_BREAKPOINT = 1024
 
 export function Process() {
   const { t } = useLanguage()
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const container = scrollContainerRef.current
-    if (!container) return
-
-    // Below the lg breakpoint the steps are a horizontally scrolling row instead of a static grid
-    const canHijack = () => window.innerWidth < LG_BREAKPOINT
-
-    // While the section is being scrolled past, redirect vertical scroll/swipe momentum
-    // into horizontal movement of the cards, then release back to normal page scroll
-    // once the row has reached either end.
-    const handleWheel = (e: WheelEvent) => {
-      if (!canHijack()) return
-      const maxScrollLeft = container.scrollWidth - container.clientWidth
-      if (maxScrollLeft <= 0) return
-
-      const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX
-      const atStart = container.scrollLeft <= 0
-      const atEnd = container.scrollLeft >= maxScrollLeft - 1
-
-      if ((delta > 0 && !atEnd) || (delta < 0 && !atStart)) {
-        e.preventDefault()
-        container.scrollLeft += delta
-      }
-    }
-
-    let touchStartX = 0
-    let touchStartY = 0
-    let isTouching = false
-
-    const handleTouchStart = (e: TouchEvent) => {
-      if (!canHijack()) return
-      touchStartX = e.touches[0].clientX
-      touchStartY = e.touches[0].clientY
-      isTouching = true
-    }
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!canHijack() || !isTouching) return
-      const maxScrollLeft = container.scrollWidth - container.clientWidth
-      if (maxScrollLeft <= 0) return
-
-      const currentX = e.touches[0].clientX
-      const currentY = e.touches[0].clientY
-      const deltaX = touchStartX - currentX
-      const deltaY = touchStartY - currentY
-
-      // Only take over a gesture that is primarily a vertical page-scroll swipe
-      if (Math.abs(deltaY) <= Math.abs(deltaX)) return
-
-      const atStart = container.scrollLeft <= 0
-      const atEnd = container.scrollLeft >= maxScrollLeft - 1
-
-      if ((deltaY > 0 && !atEnd) || (deltaY < 0 && !atStart)) {
-        e.preventDefault()
-        container.scrollLeft += deltaY
-        touchStartX = currentX
-        touchStartY = currentY
-      }
-    }
-
-    const handleTouchEnd = () => {
-      isTouching = false
-    }
-
-    container.addEventListener("wheel", handleWheel, { passive: false })
-    container.addEventListener("touchstart", handleTouchStart, { passive: true })
-    container.addEventListener("touchmove", handleTouchMove, { passive: false })
-    container.addEventListener("touchend", handleTouchEnd, { passive: true })
-
-    return () => {
-      container.removeEventListener("wheel", handleWheel)
-      container.removeEventListener("touchstart", handleTouchStart)
-      container.removeEventListener("touchmove", handleTouchMove)
-      container.removeEventListener("touchend", handleTouchEnd)
-    }
-  }, [])
-
+  
   return (
     <section id="process" className="pt-6 lg:pt-8 pb-12 lg:pb-20 bg-gradient-to-b from-secondary/10 to-background">
       <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
@@ -106,103 +26,106 @@ export function Process() {
           </p>
         </div>
 
-        {/* Steps Container - Horizontally scrollable on mobile */}
+        {/* Steps Container */}
         <div className="relative mb-12">
-          <div ref={scrollContainerRef} className="overflow-x-auto pb-4 -mx-6 px-6 lg:mx-0 lg:px-0 scrollbar-hide">
-            <div className="flex gap-6 lg:grid lg:grid-cols-4 lg:gap-6 min-w-max lg:min-w-0 lg:items-stretch">
-              {t.process.steps.map((step, index) => {
-                const Icon = processIcons[index]
-                const isLast = index === t.process.steps.length - 1
-                return (
-                  <div key={step.number} className="flex items-stretch gap-0">
-                    <div className="flex-shrink-0 w-[300px] lg:w-full h-full">
-                      <div className="bg-white border border-border rounded-2xl p-8 transition-all duration-300 hover:shadow-lg hover:border-primary/30 flex flex-col h-full relative">
-                        {/* Number - top left with transparent circle */}
-                        <div className={`absolute top-6 left-6 w-16 h-16 rounded-full ${isLast ? 'bg-emerald-500/10' : 'bg-primary/10'} flex items-center justify-center`}>
-                          <span className={`text-3xl font-bold leading-none ${isLast ? 'text-emerald-500' : 'text-primary'}`}>
-                            {step.number}
-                          </span>
-                        </div>
-                        
-                        {/* Icon - centered */}
-                        <div className="flex justify-center mb-6 mt-12">
-                          <Icon className={`w-12 h-12 ${isLast ? 'text-emerald-500' : 'text-primary'}`} strokeWidth={1.5} />
-                        </div>
-                        
-                        {/* Title - centered */}
-                        <h3 className="text-base font-bold text-foreground mb-2 text-center">
-                          {step.title}
-                        </h3>
-                        <div className={`w-12 h-1 ${isLast ? 'bg-emerald-500' : 'bg-primary'} mx-auto mb-4`}></div>
-                        
-                        {/* Description - centered */}
-                        <p className="text-sm text-muted-foreground leading-relaxed text-center flex-grow">
-                          {step.description}
-                        </p>
-                        
-                        {/* Time estimate for first step */}
-                        {index === 0 && (
-                          <div className="flex items-center justify-center gap-2 mt-4 text-primary font-medium text-sm bg-primary/10 rounded-full px-4 py-2">
-                            <Clock className="w-4 h-4" />
-                            {t.process.timeEstimate}
-                          </div>
-                        )}
-                        
-                        {/* Savings estimate for last step */}
-                        {isLast && (
-                          <div className="flex items-center justify-center gap-2 mt-4 text-emerald-500 font-medium text-sm bg-emerald-500/10 rounded-full px-4 py-2">
-                            <TrendingUp className="w-4 h-4" />
-                            Bespaar 150+ uur per jaar
-                          </div>
-                        )}
+          <div className="flex flex-col gap-0 lg:grid lg:grid-cols-4 lg:gap-6 lg:items-stretch">
+            {t.process.steps.map((step, index) => {
+              const Icon = processIcons[index]
+              const isLast = index === t.process.steps.length - 1
+              return (
+                <div key={step.number} className="flex flex-col lg:flex-row lg:items-stretch">
+                  {/* Card */}
+                  <div className="w-full">
+                    <div className="bg-white border border-border rounded-2xl p-5 lg:p-8 transition-all duration-300 hover:shadow-lg hover:border-primary/30 flex flex-col h-full relative">
+                      {/* Number */}
+                      <div className={`absolute top-4 left-4 lg:top-6 lg:left-6 w-12 h-12 lg:w-16 lg:h-16 rounded-full ${isLast ? 'bg-emerald-500/10' : 'bg-primary/10'} flex items-center justify-center`}>
+                        <span className={`text-2xl lg:text-3xl font-bold leading-none ${isLast ? 'text-emerald-500' : 'text-primary'}`}>
+                          {step.number}
+                        </span>
                       </div>
+
+                      {/* Icon */}
+                      <div className="flex justify-center mb-4 lg:mb-6 mt-10 lg:mt-12">
+                        <Icon className={`w-9 h-9 lg:w-12 lg:h-12 ${isLast ? 'text-emerald-500' : 'text-primary'}`} strokeWidth={1.5} />
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-sm lg:text-base font-bold text-foreground mb-2 text-center">
+                        {step.title}
+                      </h3>
+                      <div className={`w-10 lg:w-12 h-1 ${isLast ? 'bg-emerald-500' : 'bg-primary'} mx-auto mb-3 lg:mb-4`}></div>
+
+                      {/* Description */}
+                      <p className="text-xs lg:text-sm text-muted-foreground leading-relaxed text-center flex-grow">
+                        {step.description}
+                      </p>
+
+                      {/* Time estimate for first step */}
+                      {index === 0 && (
+                        <div className="flex items-center justify-center gap-2 mt-3 lg:mt-4 text-primary font-medium text-xs lg:text-sm bg-primary/10 rounded-full px-3 lg:px-4 py-1.5 lg:py-2">
+                          <Clock className="w-3 h-3 lg:w-4 lg:h-4" />
+                          {t.process.timeEstimate}
+                        </div>
+                      )}
+
+                      {/* Savings estimate for last step */}
+                      {isLast && (
+                        <div className="flex items-center justify-center gap-2 mt-3 lg:mt-4 text-emerald-500 font-medium text-xs lg:text-sm bg-emerald-500/10 rounded-full px-3 lg:px-4 py-1.5 lg:py-2">
+                          <TrendingUp className="w-3 h-3 lg:w-4 lg:h-4" />
+                          Bespaar 150+ uur per jaar
+                        </div>
+                      )}
                     </div>
-                    
-                    {/* Dotted arrow between cards - desktop only */}
-                    {index < t.process.steps.length - 1 && (
-                      <div className="flex items-center justify-center flex-shrink-0 -mx-3">
-                        <svg
-                          width="40"
-                          height="20"
-                          viewBox="0 0 40 20"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className={index === t.process.steps.length - 2 ? "text-emerald-500" : "text-primary"}
-                        >
-                          <path
-                            d="M0 10H35M35 10L30 5M35 10L30 15"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeDasharray="4 4"
-                          />
-                        </svg>
-                      </div>
-                    )}
                   </div>
-                )
-              })}
-            </div>
-          </div>
-          
-          {/* Scroll indicator for mobile */}
-          <div className="flex lg:hidden justify-center mt-6 gap-2">
-            <div className="text-xs text-muted-foreground flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-4 h-4"
-              >
-                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
-              </svg>
-              {t.process.scrollHint}
-            </div>
+
+                  {/* Desktop: horizontal arrow to the right */}
+                  {!isLast && (
+                    <div className="hidden lg:flex items-center justify-center flex-shrink-0 -mx-3">
+                      <svg
+                        width="40"
+                        height="20"
+                        viewBox="0 0 40 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={index === t.process.steps.length - 2 ? "text-emerald-500" : "text-primary"}
+                      >
+                        <path
+                          d="M0 10H35M35 10L30 5M35 10L30 15"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeDasharray="4 4"
+                        />
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Mobile: vertical arrow below */}
+                  {!isLast && (
+                    <div className="flex lg:hidden justify-center py-2">
+                      <svg
+                        width="20"
+                        height="32"
+                        viewBox="0 0 20 32"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={index === t.process.steps.length - 2 ? "text-emerald-500" : "text-primary"}
+                      >
+                        <path
+                          d="M10 0V27M10 27L5 22M10 27L15 22"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeDasharray="4 4"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
           </div>
         </div>
         
