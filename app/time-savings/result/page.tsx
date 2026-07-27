@@ -111,32 +111,32 @@ function TimeSavingsResultContent() {
   return (
     <>
       <Header />
-      <main className="pt-16 pb-20">
+      <main className="pt-12 pb-20">
         {/* Hero Section with Results */}
-        <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-background pt-12 lg:pt-16 pb-8 lg:pb-12 mb-12">
+        <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-background pt-6 lg:pt-8 pb-4 lg:pb-6 mb-6">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
                 <Clock className="w-4 h-4" />
                 {categoryData.title}
               </div>
               
-              <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-6 max-w-4xl mx-auto">
+              <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4 max-w-4xl mx-auto">
                 {t.timeSavingsResult.headline}{" "}
                 <span className="text-primary">{totalSavedWorkDays} {t.timeSavingsResult.workDays}</span>{" "}
                 {t.timeSavingsResult.perYear}
               </h1>
               
-              <p className="text-xl text-muted-foreground mb-12">
+              <p className="text-xl text-muted-foreground mb-6">
                 {t.timeSavingsResult.subheadline}
               </p>
             </div>
 
             {/* Stats Cards */}
-            <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-12">
+            <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-6">
               {/* Time Savings */}
-              <div className="bg-card p-6 rounded-2xl border border-border">
-                <div className="flex items-center justify-between mb-6">
+              <div className="bg-card p-5 rounded-2xl border border-border">
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                       <Clock className="w-5 h-5 text-primary" />
@@ -149,7 +149,7 @@ function TimeSavingsResultContent() {
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
-                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">
+                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-1">
                       {Math.round(totalSavedHoursPerYear)}
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -157,7 +157,7 @@ function TimeSavingsResultContent() {
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">
+                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-1">
                       {totalSavedWorkDays}
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -165,7 +165,7 @@ function TimeSavingsResultContent() {
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">
+                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-1">
                       {totalSavedWeeks}
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -176,8 +176,8 @@ function TimeSavingsResultContent() {
               </div>
 
               {/* Money Savings */}
-              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-6 rounded-2xl border border-green-500/20">
-                <div className="flex items-center gap-3 mb-6">
+              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-5 rounded-2xl border border-green-500/20">
+                <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
                     <Euro className="w-5 h-5 text-green-600" />
                   </div>
@@ -185,13 +185,13 @@ function TimeSavingsResultContent() {
                     {t.timeSavingsResult.totalMoneySaved}
                   </h3>
                 </div>
-                <div className="text-4xl lg:text-5xl font-bold text-green-600 mb-2">
+                <div className="text-4xl lg:text-5xl font-bold text-green-600 mb-1">
                   {formatCurrency(totalSavedMoneyPerYear)}
                 </div>
-                <div className="text-xs text-muted-foreground mb-4">
+                <div className="text-xs text-muted-foreground mb-3">
                   {t.timeSavingsResult.perYearLabel}
                 </div>
-                <div className="pt-4 border-t border-green-500/20">
+                <div className="pt-3 border-t border-green-500/20">
                   <p className="text-xs text-muted-foreground">
                     {t.timeSavingsResult.basedOn} {t.timeSavingsResult.avgCostPerHour}
                   </p>
@@ -199,11 +199,34 @@ function TimeSavingsResultContent() {
               </div>
             </div>
 
+            {/* CTA Button - Save Time Now */}
+            <div className="text-center my-6">
+              <div className="max-w-2xl mx-auto">
+                <Button
+                  size="lg"
+                  onClick={() => {
+                    document.getElementById('contact-form-section')?.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'center'
+                    })
+                  }}
+                  className="gap-3 px-10 py-7 text-lg font-bold bg-gradient-to-r from-primary via-primary to-primary/80 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
+                >
+                  <Clock className="w-6 h-6" />
+                  Bespaar Nu Tijd
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+                <p className="text-sm text-muted-foreground mt-4">
+                  Vrijblijvend kennismakingsgesprek
+                </p>
+              </div>
+            </div>
+
             {/* Adjustment Sliders */}
-            <div className="max-w-4xl mx-auto space-y-6">
+            <div className="max-w-4xl mx-auto space-y-4">
               {/* Hours per day slider */}
-              <div className="p-6 lg:p-8 rounded-2xl border-2 border-border bg-card">
-                <div className="flex items-center justify-between mb-6">
+              <div className="p-5 lg:p-6 rounded-2xl border-2 border-border bg-card">
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                       <Clock className="w-5 h-5 text-primary" />
@@ -233,8 +256,8 @@ function TimeSavingsResultContent() {
               </div>
 
               {/* Team size slider */}
-              <div className="p-6 lg:p-8 rounded-2xl border-2 border-border bg-card">
-                <div className="flex items-center justify-between mb-6">
+              <div className="p-5 lg:p-6 rounded-2xl border-2 border-border bg-card">
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                       <Users className="w-5 h-5 text-primary" />
@@ -297,7 +320,7 @@ function TimeSavingsResultContent() {
             </div>
 
             {/* Contact Form - Central CTA */}
-            <div className="lg:sticky lg:top-24 h-fit">
+            <div id="contact-form-section" className="lg:sticky lg:top-24 h-fit">
               <div className="bg-primary rounded-3xl p-8 lg:p-10 text-primary-foreground shadow-2xl">
                 <ContactForm 
                   variant="primary"

@@ -30,6 +30,15 @@ export function CTA() {
                 size="lg" 
                 variant="secondary" 
                 className="gap-2 bg-white text-primary hover:bg-white/90"
+                onClick={() => {
+                  window.location.href = '/#contact'
+                  setTimeout(() => {
+                    document.getElementById('contact')?.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    })
+                  }, 100)
+                }}
               >
                 {t.cta.getInTouch}
                 <ArrowRight className="w-4 h-4" />

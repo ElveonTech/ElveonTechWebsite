@@ -54,7 +54,20 @@ export function Header() {
           {/* CTA Button & Language Switcher */}
           <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher />
-            <Button size="sm">{t.header.getStarted}</Button>
+            <Button 
+              size="sm"
+              onClick={() => {
+                window.location.href = '/#contact'
+                setTimeout(() => {
+                  document.getElementById('contact')?.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                  })
+                }, 100)
+              }}
+            >
+              {t.header.getStarted}
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -89,7 +102,21 @@ export function Header() {
             ))}
             <div className="flex flex-col gap-2 pt-4 border-t border-border">
               <LanguageSwitcher />
-              <Button size="sm">{t.header.getStarted}</Button>
+              <Button 
+                size="sm"
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  window.location.href = '/#contact'
+                  setTimeout(() => {
+                    document.getElementById('contact')?.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    })
+                  }, 100)
+                }}
+              >
+                {t.header.getStarted}
+              </Button>
             </div>
           </nav>
         </div>

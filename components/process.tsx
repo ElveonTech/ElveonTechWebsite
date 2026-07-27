@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import { GitBranch, Target, Rocket, BarChart3, Clock, Shield, TrendingUp } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 
@@ -7,7 +8,32 @@ const processIcons = [GitBranch, Target, Rocket, BarChart3]
 
 export function Process() {
   const { t } = useLanguage()
-  
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const hasHintedRef = useRef(false)
+
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Only nudge on smaller screens where the steps scroll horizontally (below lg breakpoint)
+        if (entry.isIntersecting && !hasHintedRef.current && window.innerWidth < 1024) {
+          hasHintedRef.current = true
+          container.scrollTo({ left: 120, behavior: "smooth" })
+          window.setTimeout(() => {
+            container.scrollTo({ left: 0, behavior: "smooth" })
+          }, 650)
+        }
+      },
+      // Only fires once the container passes through the middle band of the viewport
+      { threshold: 0, rootMargin: "-45% 0px -45% 0px" }
+    )
+
+    observer.observe(container)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section id="process" className="pt-6 lg:pt-8 pb-12 lg:pb-20 bg-gradient-to-b from-secondary/10 to-background">
       <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
@@ -28,7 +54,7 @@ export function Process() {
 
         {/* Steps Container - Horizontally scrollable on mobile */}
         <div className="relative mb-12">
-          <div className="overflow-x-auto pb-4 -mx-6 px-6 lg:mx-0 lg:px-0 scrollbar-hide">
+          <div ref={scrollContainerRef} className="overflow-x-auto pb-4 -mx-6 px-6 lg:mx-0 lg:px-0 scrollbar-hide">
             <div className="flex gap-6 lg:grid lg:grid-cols-4 lg:gap-6 min-w-max lg:min-w-0 lg:items-stretch">
               {t.process.steps.map((step, index) => {
                 const Icon = processIcons[index]

@@ -41,11 +41,22 @@ export function Hero() {
                 </Link>
               </Button>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button variant="outline" size="lg" className="gap-2 w-full sm:w-auto" asChild>
-                  <a href="mailto:contact@elveontech.com">
-                    {t.hero.scheduleCall}
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="gap-2 w-full sm:w-auto"
+                  onClick={() => {
+                    window.location.href = '/#contact'
+                    setTimeout(() => {
+                      document.getElementById('contact')?.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      })
+                    }, 100)
+                  }}
+                >
+                  {t.hero.scheduleCall}
+                  <ArrowRight className="w-4 h-4" />
                 </Button>
               </div>
             </div>
