@@ -4,11 +4,10 @@ import { useState, useEffect, Suspense } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
-import { Slider } from "@/components/ui/slider"
 import { ContactForm } from "@/components/contact-form"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { useSearchParams, useRouter } from "next/navigation"
-import { Clock, CheckCircle2, Mail, Phone, ArrowRight, Users, Euro, Calculator } from "lucide-react"
+import { Clock, CheckCircle2, Mail, Phone, ArrowRight, Users, Euro, Calculator, Plus, Minus, SlidersHorizontal, ChevronDown } from "lucide-react"
 import Link from "next/link"
 
 // Custom time values: 5, 10, 15, 30, 45 min, 1h, then 30min increments to 3h, then 1h increments to 8h
@@ -65,6 +64,7 @@ function TimeSavingsResultContent() {
   const [category, setCategory] = useState(initialCategory)
   const [sliderIndex, setSliderIndex] = useState(findClosestIndex(initialHours))
   const [numberOfPeople, setNumberOfPeople] = useState(initialPeople)
+  const [showAdjust, setShowAdjust] = useState(false)
 
   const hoursPerDay = TIME_VALUES[sliderIndex]
 
@@ -113,180 +113,245 @@ function TimeSavingsResultContent() {
       <Header />
       <main className="pt-12 pb-20">
         {/* Hero Section with Results */}
-        <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-background pt-6 lg:pt-8 pb-4 lg:pb-6 mb-6">
+        <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-background pt-10 lg:pt-16 pb-10 lg:pb-16 mb-6">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-                <Clock className="w-4 h-4" />
-                {categoryData.title}
-              </div>
-              
-              <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4 max-w-4xl mx-auto">
-                {t.timeSavingsResult.headline}{" "}
-                <span className="text-primary">{totalSavedWorkDays} {t.timeSavingsResult.workDays}</span>{" "}
-                {t.timeSavingsResult.perYear}
-              </h1>
-              
-              <p className="text-xl text-muted-foreground mb-6">
-                {t.timeSavingsResult.subheadline}
-              </p>
-            </div>
+            <div className="grid lg:grid-cols-[1fr_200px] lg:gap-16 items-start">
 
-            {/* Stats Cards */}
-            <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-6">
-              {/* Time Savings */}
-              <div className="bg-card p-5 rounded-2xl border border-border">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Clock className="w-5 h-5 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {t.timeSavingsResult.totalTimeSaved}
-                    </h3>
+              {/* Left: headline + stats + CTA */}
+              <div>
+                <div className="mb-6">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+                    <Clock className="w-4 h-4" />
+                    {categoryData.title}
                   </div>
-                  <span className="text-sm text-muted-foreground">per jaar</span>
-                </div>
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="text-center">
-                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-1">
-                      {Math.round(totalSavedHoursPerYear)}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {t.timeSavingsResult.hours}
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-1">
-                      {totalSavedWorkDays}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {t.timeSavingsResult.days}
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-4xl lg:text-5xl font-bold text-primary mb-1">
-                      {totalSavedWeeks}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {t.timeSavingsResult.weeks}
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              {/* Money Savings */}
-              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-5 rounded-2xl border border-green-500/20">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
-                    <Euro className="w-5 h-5 text-green-600" />
+                  <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
+                    {t.timeSavingsResult.headline}{" "}
+                    <span className="text-primary">{totalSavedWorkDays} {t.timeSavingsResult.workDays}</span>{" "}
+                    {t.timeSavingsResult.perYear}
+                  </h1>
+
+                  <p className="text-xl text-muted-foreground">
+                    {t.timeSavingsResult.subheadline}
+                  </p>
+                </div>
+
+                {/* Stats Cards */}
+                <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                  {/* Time Savings */}
+                  <div className="bg-card p-5 rounded-2xl border border-border">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
+                          <Clock className="w-4 h-4 text-primary" />
+                        </div>
+                        <h3 className="text-sm font-semibold text-foreground">
+                          {t.timeSavingsResult.totalTimeSaved}
+                        </h3>
+                      </div>
+                      <span className="text-xs text-muted-foreground">per jaar</span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="text-center">
+                        <div className="text-3xl lg:text-4xl font-bold text-primary mb-0.5">
+                          {Math.round(totalSavedHoursPerYear)}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {t.timeSavingsResult.hours}
+                        </div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl lg:text-4xl font-bold text-primary mb-0.5">
+                          {totalSavedWorkDays}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {t.timeSavingsResult.days}
+                        </div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl lg:text-4xl font-bold text-primary mb-0.5">
+                          {totalSavedWeeks}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {t.timeSavingsResult.weeks}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {t.timeSavingsResult.totalMoneySaved}
-                  </h3>
+
+                  {/* Money Savings */}
+                  <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-5 rounded-2xl border border-green-500/20">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-9 h-9 rounded-xl bg-green-500/10 flex items-center justify-center">
+                        <Euro className="w-4 h-4 text-green-600" />
+                      </div>
+                      <h3 className="text-sm font-semibold text-foreground">
+                        {t.timeSavingsResult.totalMoneySaved}
+                      </h3>
+                    </div>
+                    <div className="text-3xl lg:text-4xl font-bold text-green-600 mb-1">
+                      {formatCurrency(totalSavedMoneyPerYear)}
+                    </div>
+                    <div className="text-xs text-muted-foreground mb-3">
+                      {t.timeSavingsResult.perYearLabel}
+                    </div>
+                    <div className="pt-3 border-t border-green-500/20">
+                      <p className="text-xs text-muted-foreground">
+                        {t.timeSavingsResult.basedOn} {t.timeSavingsResult.avgCostPerHour}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-4xl lg:text-5xl font-bold text-green-600 mb-1">
-                  {formatCurrency(totalSavedMoneyPerYear)}
+
+                {/* Mobile: Aanpassen toggle */}
+                <div className="lg:hidden mb-4">
+                  <button
+                    onClick={() => setShowAdjust(!showAdjust)}
+                    className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <SlidersHorizontal className="w-3.5 h-3.5" />
+                    Aanpassen
+                    <ChevronDown className={`w-3 h-3 transition-transform ${showAdjust ? "rotate-180" : ""}`} />
+                  </button>
+
+                  {showAdjust && (
+                    <div className="mt-3 p-3 rounded-xl border border-border bg-card/80 space-y-3">
+                      {/* Category */}
+                      <div>
+                        <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Categorie</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {t.timeSavings.categories.map((cat) => (
+                            <button
+                              key={cat.id}
+                              onClick={() => setCategory(cat.id)}
+                              className={`px-2.5 py-1 rounded-md text-xs transition-all ${
+                                category === cat.id
+                                  ? "bg-primary text-primary-foreground font-medium"
+                                  : "bg-muted text-muted-foreground hover:text-foreground"
+                              }`}
+                            >
+                              {cat.title}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex gap-6">
+                        {/* Hours */}
+                        <div>
+                          <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Uren/dag</p>
+                          <div className="flex items-center gap-2">
+                            <button onClick={() => setSliderIndex(Math.max(0, sliderIndex - 1))} className="w-6 h-6 rounded-md border border-border/60 flex items-center justify-center hover:bg-muted text-muted-foreground"><Minus className="w-3 h-3" /></button>
+                            <span className="text-sm font-semibold text-foreground min-w-[40px] text-center">{formatTimeValue(hoursPerDay)}</span>
+                            <button onClick={() => setSliderIndex(Math.min(TIME_VALUES.length - 1, sliderIndex + 1))} className="w-6 h-6 rounded-md border border-border/60 flex items-center justify-center hover:bg-muted text-muted-foreground"><Plus className="w-3 h-3" /></button>
+                          </div>
+                        </div>
+                        {/* People */}
+                        <div>
+                          <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Personen</p>
+                          <div className="flex items-center gap-2">
+                            <button onClick={() => setNumberOfPeople(Math.max(1, numberOfPeople - 1))} className="w-6 h-6 rounded-md border border-border/60 flex items-center justify-center hover:bg-muted text-muted-foreground"><Minus className="w-3 h-3" /></button>
+                            <span className="text-sm font-semibold text-foreground min-w-[40px] text-center">{numberOfPeople}</span>
+                            <button onClick={() => setNumberOfPeople(Math.min(50, numberOfPeople + 1))} className="w-6 h-6 rounded-md border border-border/60 flex items-center justify-center hover:bg-muted text-muted-foreground"><Plus className="w-3 h-3" /></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div className="text-xs text-muted-foreground mb-3">
-                  {t.timeSavingsResult.perYearLabel}
-                </div>
-                <div className="pt-3 border-t border-green-500/20">
-                  <p className="text-xs text-muted-foreground">
-                    {t.timeSavingsResult.basedOn} {t.timeSavingsResult.avgCostPerHour}
+
+                {/* CTA Button */}
+                <div>
+                  <Button
+                    size="lg"
+                    onClick={() => {
+                      document.getElementById('contact-form-section')?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                      })
+                    }}
+                    className="gap-3 px-8 py-6 text-base font-bold bg-gradient-to-r from-primary via-primary to-primary/80 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
+                  >
+                    <Clock className="w-5 h-5" />
+                    Bespaar Nu Tijd
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                  <p className="text-sm text-muted-foreground mt-3">
+                    Vrijblijvend kennismakingsgesprek
                   </p>
                 </div>
               </div>
-            </div>
 
-            {/* CTA Button - Save Time Now */}
-            <div className="text-center my-6">
-              <div className="max-w-2xl mx-auto">
-                <Button
-                  size="lg"
-                  onClick={() => {
-                    document.getElementById('contact-form-section')?.scrollIntoView({ 
-                      behavior: 'smooth',
-                      block: 'center'
-                    })
-                  }}
-                  className="gap-3 px-10 py-7 text-lg font-bold bg-gradient-to-r from-primary via-primary to-primary/80 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
-                >
-                  <Clock className="w-6 h-6" />
-                  Bespaar Nu Tijd
-                  <ArrowRight className="w-5 h-5" />
-                </Button>
-                <p className="text-sm text-muted-foreground mt-4">
-                  Vrijblijvend kennismakingsgesprek
-                </p>
-              </div>
-            </div>
-
-            {/* Adjustment Sliders */}
-            <div className="max-w-4xl mx-auto space-y-4">
-              {/* Hours per day slider */}
-              <div className="p-5 lg:p-6 rounded-2xl border-2 border-border bg-card">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Clock className="w-5 h-5 text-primary" />
-                    </div>
-                    <label className="text-lg font-semibold text-foreground">
-                      {t.timeSavingsResult.adjustHours}
-                    </label>
-                  </div>
-                  <div className="text-3xl font-bold text-primary">
-                    {formatTimeValue(hoursPerDay)}
+              {/* Right: subtle controls panel — desktop only */}
+              <div className="hidden lg:block space-y-4 lg:sticky lg:top-24 lg:pt-2">
+                {/* Category list */}
+                <div>
+                  <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Categorie</p>
+                  <div className="space-y-0.5">
+                    {t.timeSavings.categories.map((cat) => (
+                      <button
+                        key={cat.id}
+                        onClick={() => setCategory(cat.id)}
+                        className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-all ${
+                          category === cat.id
+                            ? "text-primary font-semibold"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        {category === cat.id && <span className="mr-1">›</span>}{cat.title}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
-                <Slider
-                  value={[sliderIndex]}
-                  onValueChange={(value) => setSliderIndex(value[0])}
-                  min={0}
-                  max={TIME_VALUES.length - 1}
-                  step={1}
-                  className="mb-2"
-                />
+                <div className="border-t border-border/50" />
 
-                <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                  <span>5 min</span>
-                  <span>8+ uur</span>
-                </div>
-              </div>
-
-              {/* Team size slider */}
-              <div className="p-5 lg:p-6 rounded-2xl border-2 border-border bg-card">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Users className="w-5 h-5 text-primary" />
-                    </div>
-                    <label className="text-lg font-semibold text-foreground">
-                      {t.timeSavingsResult.adjustTeamSize}
-                    </label>
-                  </div>
-                  <div className="text-3xl font-bold text-primary">
-                    {numberOfPeople} <span className="text-base font-normal text-muted-foreground">
-                      {numberOfPeople === 1 ? t.timeSavingsResult.person : t.timeSavingsResult.people}
+                {/* Hours +/- */}
+                <div>
+                  <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Uren per dag</p>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setSliderIndex(Math.max(0, sliderIndex - 1))}
+                      className="w-6 h-6 rounded-md border border-border/60 flex items-center justify-center hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+                    >
+                      <Minus className="w-3 h-3" />
+                    </button>
+                    <span className="text-sm font-semibold text-foreground min-w-[44px] text-center">
+                      {formatTimeValue(hoursPerDay)}
                     </span>
+                    <button
+                      onClick={() => setSliderIndex(Math.min(TIME_VALUES.length - 1, sliderIndex + 1))}
+                      className="w-6 h-6 rounded-md border border-border/60 flex items-center justify-center hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+                    >
+                      <Plus className="w-3 h-3" />
+                    </button>
                   </div>
                 </div>
 
-                <Slider
-                  value={[numberOfPeople]}
-                  onValueChange={(value) => setNumberOfPeople(value[0])}
-                  min={1}
-                  max={50}
-                  step={1}
-                  className="mb-2"
-                />
-
-                <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                  <span>1</span>
-                  <span>50</span>
+                {/* People +/- */}
+                <div>
+                  <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Personen</p>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setNumberOfPeople(Math.max(1, numberOfPeople - 1))}
+                      className="w-6 h-6 rounded-md border border-border/60 flex items-center justify-center hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+                    >
+                      <Minus className="w-3 h-3" />
+                    </button>
+                    <span className="text-sm font-semibold text-foreground min-w-[44px] text-center">
+                      {numberOfPeople} <span className="text-xs font-normal text-muted-foreground">
+                        {numberOfPeople === 1 ? t.timeSavingsResult.person : t.timeSavingsResult.people}
+                      </span>
+                    </span>
+                    <button
+                      onClick={() => setNumberOfPeople(Math.min(50, numberOfPeople + 1))}
+                      className="w-6 h-6 rounded-md border border-border/60 flex items-center justify-center hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+                    >
+                      <Plus className="w-3 h-3" />
+                    </button>
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
