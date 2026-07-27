@@ -5,33 +5,87 @@ import { GitBranch, Target, Rocket, BarChart3, Clock, Shield, TrendingUp } from 
 import { useLanguage } from "@/lib/i18n/language-context"
 
 const processIcons = [GitBranch, Target, Rocket, BarChart3]
+const LG_BREAKPOINT = 1024
 
 export function Process() {
   const { t } = useLanguage()
   const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const hasHintedRef = useRef(false)
 
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Only nudge on smaller screens where the steps scroll horizontally (below lg breakpoint)
-        if (entry.isIntersecting && !hasHintedRef.current && window.innerWidth < 1024) {
-          hasHintedRef.current = true
-          container.scrollTo({ left: 120, behavior: "smooth" })
-          window.setTimeout(() => {
-            container.scrollTo({ left: 0, behavior: "smooth" })
-          }, 650)
-        }
-      },
-      // Only fires once the container passes through the middle band of the viewport
-      { threshold: 0, rootMargin: "-45% 0px -45% 0px" }
-    )
+    // Below the lg breakpoint the steps are a horizontally scrolling row instead of a static grid
+    const canHijack = () => window.innerWidth < LG_BREAKPOINT
 
-    observer.observe(container)
-    return () => observer.disconnect()
+    // While the section is being scrolled past, redirect vertical scroll/swipe momentum
+    // into horizontal movement of the cards, then release back to normal page scroll
+    // once the row has reached either end.
+    const handleWheel = (e: WheelEvent) => {
+      if (!canHijack()) return
+      const maxScrollLeft = container.scrollWidth - container.clientWidth
+      if (maxScrollLeft <= 0) return
+
+      const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX
+      const atStart = container.scrollLeft <= 0
+      const atEnd = container.scrollLeft >= maxScrollLeft - 1
+
+      if ((delta > 0 && !atEnd) || (delta < 0 && !atStart)) {
+        e.preventDefault()
+        container.scrollLeft += delta
+      }
+    }
+
+    let touchStartX = 0
+    let touchStartY = 0
+    let isTouching = false
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (!canHijack()) return
+      touchStartX = e.touches[0].clientX
+      touchStartY = e.touches[0].clientY
+      isTouching = true
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!canHijack() || !isTouching) return
+      const maxScrollLeft = container.scrollWidth - container.clientWidth
+      if (maxScrollLeft <= 0) return
+
+      const currentX = e.touches[0].clientX
+      const currentY = e.touches[0].clientY
+      const deltaX = touchStartX - currentX
+      const deltaY = touchStartY - currentY
+
+      // Only take over a gesture that is primarily a vertical page-scroll swipe
+      if (Math.abs(deltaY) <= Math.abs(deltaX)) return
+
+      const atStart = container.scrollLeft <= 0
+      const atEnd = container.scrollLeft >= maxScrollLeft - 1
+
+      if ((deltaY > 0 && !atEnd) || (deltaY < 0 && !atStart)) {
+        e.preventDefault()
+        container.scrollLeft += deltaY
+        touchStartX = currentX
+        touchStartY = currentY
+      }
+    }
+
+    const handleTouchEnd = () => {
+      isTouching = false
+    }
+
+    container.addEventListener("wheel", handleWheel, { passive: false })
+    container.addEventListener("touchstart", handleTouchStart, { passive: true })
+    container.addEventListener("touchmove", handleTouchMove, { passive: false })
+    container.addEventListener("touchend", handleTouchEnd, { passive: true })
+
+    return () => {
+      container.removeEventListener("wheel", handleWheel)
+      container.removeEventListener("touchstart", handleTouchStart)
+      container.removeEventListener("touchmove", handleTouchMove)
+      container.removeEventListener("touchend", handleTouchEnd)
+    }
   }, [])
 
   return (
@@ -106,7 +160,7 @@ export function Process() {
                     
                     {/* Dotted arrow between cards - desktop only */}
                     {index < t.process.steps.length - 1 && (
-                      <div className="hidden lg:flex items-center justify-center flex-shrink-0 -mx-3">
+                      <div className="flex items-center justify-center flex-shrink-0 -mx-3">
                         <svg
                           width="40"
                           height="20"
