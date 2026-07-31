@@ -51,23 +51,23 @@ function postToResend(body: string, apiKey: string): Promise<{ status: number; b
 }
 
 function getNetworkErrorMessage(error: unknown): string {
-  const message = error instanceof Error ? error.message : 'Onbekende netwerkfout'
+  const message = error instanceof Error ? error.message : 'Unknown network error'
 
   if (
     message.includes('certificate') ||
     message.includes('UNABLE_TO_VERIFY')
   ) {
-    return 'Lokaal SSL-certificaatprobleem. Zet RESEND_DEV_SKIP_TLS=true in .env.local en herstart de dev server.'
+    return 'Local SSL certificate issue. Set RESEND_DEV_SKIP_TLS=true in .env.local and restart the dev server.'
   }
 
-  return `Netwerkfout bij contact met Resend: ${message}`
+  return `Network error contacting Resend: ${message}`
 }
 
 export async function sendContactEmail(params: SendEmailParams): Promise<SendEmailResult> {
   const apiKey = process.env.RESEND_API_KEY
 
   if (!apiKey) {
-    return { data: null, error: { message: 'Email service niet geconfigureerd' } }
+    return { data: null, error: { message: 'Email service not configured' } }
   }
 
   const payload = JSON.stringify({
@@ -96,12 +96,12 @@ export async function sendContactEmail(params: SendEmailParams): Promise<SendEma
       const parsed = JSON.parse(response.body) as { message?: string }
       return {
         data: null,
-        error: { message: parsed.message || 'Fout bij verzenden van aanvraag' },
+        error: { message: parsed.message || 'Error sending request' },
       }
     } catch {
       return {
         data: null,
-        error: { message: `Resend API fout (${response.status})` },
+        error: { message: `Resend API error (${response.status})` },
       }
     }
   }
@@ -109,10 +109,10 @@ export async function sendContactEmail(params: SendEmailParams): Promise<SendEma
   try {
     const parsed = JSON.parse(response.body) as { id?: string }
     if (!parsed.id) {
-      return { data: null, error: { message: 'Email kon niet worden verzonden' } }
+      return { data: null, error: { message: 'Email could not be sent' } }
     }
     return { data: { id: parsed.id }, error: null }
   } catch {
-    return { data: null, error: { message: 'Ongeldig antwoord van Resend' } }
+    return { data: null, error: { message: 'Invalid response from Resend' } }
   }
 }

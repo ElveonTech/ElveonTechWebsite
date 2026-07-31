@@ -29,9 +29,9 @@ const TIME_VALUES = [
   9       // 8+ hours (represented as 9 internally)
 ]
 
-const formatTimeValue = (hours: number) => {
-  if (hours >= 9) return "8+ uur"
-  if (hours >= 1) return `${hours} uur`
+const formatTimeValue = (hours: number, hoursOver8: string, hoursSuffix: string) => {
+  if (hours >= 9) return hoursOver8
+  if (hours >= 1) return `${hours}${hoursSuffix}`
   const minutes = Math.round(hours * 60)
   return `${minutes} min`
 }
@@ -45,6 +45,7 @@ export default function TimeSavingsPage() {
   const [showSlider, setShowSlider] = useState(false)
 
   const hoursPerDay = TIME_VALUES[sliderIndex]
+  const fmt = (h: number) => formatTimeValue(h, t.timeSavings.hoursOver8, t.timeSavings.hoursSuffix)
 
   useEffect(() => {
     if (selectedCategory) {
@@ -95,7 +96,7 @@ export default function TimeSavingsPage() {
             <div className="md:hidden mb-4 p-4 rounded-xl bg-primary/10 border-2 border-primary">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
-                  <div className="text-xs text-primary font-medium mb-1">Geselecteerd:</div>
+                  <div className="text-xs text-primary font-medium mb-1">{t.timeSavings.selectedLabel}</div>
                   <div className="text-sm font-semibold text-foreground">{selectedCategoryData?.title}</div>
                 </div>
                 <ChevronDown className="w-5 h-5 text-primary animate-bounce" />
@@ -117,7 +118,7 @@ export default function TimeSavingsPage() {
                       {t.timeSavings.currentlySpend}
                     </label>
                     <div className="text-2xl font-bold text-primary">
-                      {formatTimeValue(hoursPerDay)}
+                      {fmt(hoursPerDay)}
                     </div>
                   </div>
                 </div>
@@ -133,7 +134,7 @@ export default function TimeSavingsPage() {
 
                 <div className="flex justify-between text-xs text-muted-foreground mt-2">
                   <span>5 min</span>
-                  <span>8+ uur</span>
+                  <span>{t.timeSavings.hoursOver8}</span>
                 </div>
               </div>
 
@@ -142,11 +143,11 @@ export default function TimeSavingsPage() {
                 <div className="mb-4">
                   <div className="flex items-center justify-between mb-2">
                     <label className="text-base font-semibold text-foreground">
-                      Aantal medewerkers
+                      {t.timeSavings.teamSizeLabel}
                     </label>
                     <div className="text-2xl font-bold text-primary">
                       {numberOfPeople} <span className="text-sm font-normal text-muted-foreground">
-                        {numberOfPeople === 1 ? 'persoon' : 'personen'}
+                        {numberOfPeople === 1 ? t.timeSavings.person : t.timeSavings.people}
                       </span>
                     </div>
                   </div>
@@ -195,7 +196,7 @@ export default function TimeSavingsPage() {
                     <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                   </div>
                   <div className="px-2 sm:px-3 py-1 rounded-full bg-green-500/10 text-green-600 text-xs font-medium border border-green-500/20">
-                    Bespaar {category.avgSavings}
+                    {t.timeSavings.savePrefix}{category.avgSavings}
                   </div>
                 </div>
                 <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1 sm:mb-2">
@@ -237,7 +238,7 @@ export default function TimeSavingsPage() {
 
                 {selectedCategory && (
                   <div className="text-3xl font-bold text-primary mb-6">
-                    {formatTimeValue(hoursPerDay)}
+                    {fmt(hoursPerDay)}
                   </div>
                 )}
 
@@ -253,7 +254,7 @@ export default function TimeSavingsPage() {
 
                 <div className="flex justify-between text-sm text-muted-foreground mt-2">
                   <span>5 min</span>
-                  <span>8+ uur</span>
+                  <span>{t.timeSavings.hoursOver8}</span>
                 </div>
               </div>
 
@@ -270,14 +271,14 @@ export default function TimeSavingsPage() {
                     <Users className="w-5 h-5 text-primary" />
                   </div>
                   <label className="text-lg font-semibold text-foreground">
-                    Aantal medewerkers
+                    {t.timeSavings.teamSizeLabel}
                   </label>
                 </div>
 
                 {selectedCategory && (
                   <div className="text-3xl font-bold text-primary mb-6">
                     {numberOfPeople} <span className="text-base font-normal text-muted-foreground">
-                      {numberOfPeople === 1 ? 'persoon' : 'personen'}
+                      {numberOfPeople === 1 ? t.timeSavings.person : t.timeSavings.people}
                     </span>
                   </div>
                 )}

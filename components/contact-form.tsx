@@ -3,6 +3,7 @@
 import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Mail, CheckCircle2 } from "lucide-react"
+import { useLanguage } from "@/lib/i18n/language-context"
 
 interface ContactFormProps {
   variant?: "default" | "primary"
@@ -17,16 +18,20 @@ interface ContactFormProps {
 
 export function ContactForm({ 
   variant = "default", 
-  title = "Laat je interesse zien",
-  description = "Vul je gegevens in en wij nemen zo snel mogelijk contact met je op.",
+  title,
+  description,
   context
 }: ContactFormProps) {
+  const { t } = useLanguage()
   const [showComment, setShowComment] = useState(false)
   const [commentValue, setCommentValue] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessMessage, setShowSuccessMessage] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
   const formRef = useRef<HTMLFormElement>(null)
+
+  const resolvedTitle = title ?? t.contactForm.title
+  const resolvedDescription = description ?? t.contactForm.description
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -53,13 +58,11 @@ export function ContactForm({
       const result = await response.json()
 
       if (!response.ok) {
-        // Use server error message if available
         throw new Error(result.error || 'Failed to send message')
       }
 
       setShowSuccessMessage(true)
       
-      // Reset form using ref instead of e.currentTarget
       if (formRef.current) {
         formRef.current.reset()
       }
@@ -71,11 +74,9 @@ export function ContactForm({
         setShowSuccessMessage(false)
       }, 5000)
     } catch (error: any) {
-      // Display specific error message
-      const message = error.message || 'Er ging iets mis. Probeer het opnieuw of neem direct contact op via email.'
+      const message = error.message || t.contactForm.errorDefault
       setErrorMessage(message)
       
-      // Auto-hide error after 10 seconds
       setTimeout(() => {
         setErrorMessage("")
       }, 10000)
@@ -99,8 +100,8 @@ export function ContactForm({
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div className="flex-1">
-            <p className="font-semibold mb-1">Bedankt voor je interesse!</p>
-            <p className="text-sm text-white/90">We nemen zo snel mogelijk contact met je op.</p>
+            <p className="font-semibold mb-1">{t.contactForm.successTitle}</p>
+            <p className="text-sm text-white/90">{t.contactForm.successMessage}</p>
           </div>
           <button
             onClick={() => setShowSuccessMessage(false)}
@@ -113,10 +114,10 @@ export function ContactForm({
 
       <div className={isPrimary ? "" : "bg-card rounded-2xl p-8 border border-border shadow-lg"}>
         <h3 className={`text-2xl lg:text-3xl font-bold mb-4 ${textColor}`}>
-          {title}
+          {resolvedTitle}
         </h3>
         <p className={`${isPrimary ? 'text-primary-foreground/80' : 'text-muted-foreground'} text-lg mb-8`}>
-          {description}
+          {resolvedDescription}
         </p>
 
         <form ref={formRef} className="space-y-4" onSubmit={handleSubmit}>
@@ -132,14 +133,14 @@ export function ContactForm({
               required
               disabled={isSubmitting}
               className={`w-full px-4 py-3 rounded-lg ${placeholderBg} ${inputTextColor} border-2 border-transparent focus:border-primary/20 focus:outline-none transition-colors disabled:opacity-50`}
-              placeholder="jouw@email.nl"
+              placeholder={t.contactForm.emailPlaceholder}
             />
           </div>
 
           {/* Phone */}
           <div>
             <label htmlFor="phone" className={`block text-sm font-medium mb-2 ${labelColor}`}>
-              Telefoonnummer *
+              {t.contactForm.phoneLabel}
             </label>
             <input
               type="tel"
@@ -157,7 +158,7 @@ export function ContactForm({
             <div className="animate-in fade-in slide-in-from-top-2 duration-300">
               <div className="flex items-center justify-between mb-2">
                 <label htmlFor="comment" className={`block text-sm font-medium ${labelColor}`}>
-                  Opmerking (optioneel)
+                  {t.contactForm.commentLabel}
                 </label>
                 <button
                   type="button"
@@ -168,7 +169,7 @@ export function ContactForm({
                   className={`text-xs ${isPrimary ? 'text-primary-foreground/60 hover:text-primary-foreground' : 'text-muted-foreground hover:text-foreground'} transition-colors flex items-center gap-1`}
                 >
                   <span className="text-lg leading-none">×</span>
-                  <span>Verwijderen</span>
+                  <span>{t.contactForm.removeComment}</span>
                 </button>
               </div>
               <textarea
@@ -179,7 +180,7 @@ export function ContactForm({
                 onChange={(e) => setCommentValue(e.target.value)}
                 disabled={isSubmitting}
                 className={`w-full px-4 py-3 rounded-lg ${placeholderBg} ${inputTextColor} border-2 border-transparent focus:border-primary/20 focus:outline-none transition-colors resize-none disabled:opacity-50`}
-                placeholder="Vertel ons waar we je mee kunnen helpen..."
+                placeholder={t.contactForm.commentPlaceholder}
               />
             </div>
           )}
@@ -192,7 +193,7 @@ export function ContactForm({
               className={`text-sm ${isPrimary ? 'text-primary-foreground/80 hover:text-primary-foreground' : 'text-muted-foreground hover:text-foreground'} transition-colors flex items-center gap-2`}
             >
               <span className="text-lg">+</span>
-              Opmerking toevoegen (optioneel)
+              {t.contactForm.addComment}
             </button>
           )}
 
@@ -211,7 +212,7 @@ export function ContactForm({
             className={`w-full gap-2 ${isPrimary ? 'bg-white text-primary hover:bg-white/90' : ''}`}
           >
             <Mail className="w-5 h-5" />
-            {isSubmitting ? 'Verzenden...' : 'Verstuur aanvraag'}
+            {isSubmitting ? t.contactForm.sending : t.contactForm.submit}
           </Button>
         </form>
       </div>

@@ -19,15 +19,15 @@ export default function FAQPage() {
               {/* Left: Calculator CTA */}
               <div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
-                  Benieuwd Hoeveel Tijd U Kunt Besparen?
+                  Curious How Much Time You Can Save?
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  Gebruik onze gratis calculator om te ontdekken hoeveel tijd en geld uw team kan besparen door processen slimmer aan te pakken.
+                  Use our free calculator to discover how much time and money your team can save by handling processes smarter.
                 </p>
                 <Button size="lg" className="gap-2 text-lg py-6" asChild>
                   <Link href="/time-savings">
                     <Calculator className="w-5 h-5" />
-                    Bereken Uw Tijdsbesparing
+                    Calculate Your Time Savings
                   </Link>
                 </Button>
               </div>
@@ -36,10 +36,10 @@ export default function FAQPage() {
               <div className="lg:sticky lg:top-24 h-fit">
                 <div className="bg-primary rounded-3xl p-8 lg:p-10 text-primary-foreground shadow-2xl">
                   <h3 className="text-2xl lg:text-3xl font-bold mb-4">
-                    Klaar Om Te Starten?
+                    Ready To Get Started?
                   </h3>
                   <p className="text-primary-foreground/80 text-lg mb-8">
-                    Neem contact met ons op voor een vrijblijvend gesprek over de mogelijkheden voor uw bedrijf.
+                    Contact us for a no-obligation call about the options for your business.
                   </p>
 
                   <Button 
@@ -50,7 +50,7 @@ export default function FAQPage() {
                   >
                     <a href="mailto:contact@elveontech.com">
                       <Mail className="w-5 h-5" />
-                      Stuur Een E-mail
+                      Send An Email
                     </a>
                   </Button>
 
@@ -61,7 +61,7 @@ export default function FAQPage() {
                       </div>
                       <div>
                         <div className="text-xs text-primary-foreground/60 mb-1">
-                          E-mail
+                          Email
                         </div>
                         <a 
                           href="mailto:contact@elveontech.com"
@@ -78,7 +78,7 @@ export default function FAQPage() {
                       </div>
                       <div>
                         <div className="text-xs text-primary-foreground/60 mb-1">
-                          Telefoon
+                          Phone
                         </div>
                         <a 
                           href="tel:+31628546303"

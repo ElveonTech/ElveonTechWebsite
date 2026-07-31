@@ -85,7 +85,7 @@ export function FAQ() {
                     className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 font-medium transition-colors border-b border-primary/30 hover:border-primary/60 pb-0.5"
                   >
                     <Calculator className="w-4 h-4" />
-                    Bereken uw tijdsbesparing
+                    {t.faq.calculateLink}
                   </Link>
                 </div>
               </div>

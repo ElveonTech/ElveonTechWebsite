@@ -65,6 +65,8 @@ export const translations = {
       bottomMessage: "Transparant, resultaatgericht en altijd met focus op uw team en doelen.",
       bottomMessageHighlight: "",
       bottomMessageEnd: "",
+      savingsEstimate: "Bespaar 150+ uur per jaar",
+      cta: "Plan een gratis gesprek",
       steps: [
         {
           number: "01",
@@ -187,6 +189,13 @@ export const translations = {
       hoursPerDay: "uur per dag",
       currentlySpend: "Hoeveel tijd besteedt u hier momenteel dagelijks aan?",
       calculate: "Bereken Besparing",
+      selectedLabel: "Geselecteerd:",
+      teamSizeLabel: "Aantal medewerkers",
+      person: "persoon",
+      people: "personen",
+      savePrefix: "Bespaar ",
+      hoursOver8: "8+ uur",
+      hoursSuffix: " uur",
       categories: [
         {
           id: "email",
@@ -256,6 +265,14 @@ export const translations = {
       email: "Email",
       phone: "Telefoon",
       calculateAgain: "Bereken opnieuw",
+      adjustLabel: "Aanpassen",
+      categoryLabel: "Categorie",
+      hoursPerDayShort: "Uren/dag",
+      peopleLabel: "Personen",
+      ctaButton: "Bespaar Nu Tijd",
+      ctaSubtext: "Vrijblijvend kennismakingsgesprek",
+      hoursPerDayLabel: "Uren per dag",
+      orContactDirectly: "Of neem direct contact op:",
       solutions: {
         email: {
           title: "E-mail Automatisering",
@@ -321,6 +338,7 @@ export const translations = {
     },
     faq: {
       badge: "Veelgestelde Vragen",
+      calculateLink: "Bereken uw tijdsbesparing",
       title: "Veelgestelde Vragen",
       subtitle: "Vind antwoorden op de meest gestelde vragen over automatisering en onze diensten",
       questions: [
@@ -357,6 +375,21 @@ export const translations = {
           answer: "Ja, we bieden verschillende supportopties. Voor al onze klanten is er een support kanaal waar vragen binnen 24 uur worden beantwoord. Voor kritieke processen bieden we uitgebreidere SLA's met snellere responstijden. Bovendien monitoren we proactief alle automatiseringen en krijgt u automatisch een melding als er iets onverwachts gebeurt, vaak nog voordat u het zelf merkt."
         }
       ]
+    },
+    contactForm: {
+      title: "Klaar om Uw Tijd Terug te Krijgen?",
+      description: "Laat je interesse zien en wij nemen zo snel mogelijk contact met je op voor een vrijblijvend gesprek.",
+      errorDefault: "Er ging iets mis. Probeer het opnieuw of neem direct contact op via email.",
+      successTitle: "Bedankt voor je interesse!",
+      successMessage: "We nemen zo snel mogelijk contact met je op.",
+      emailPlaceholder: "jouw@email.nl",
+      phoneLabel: "Telefoonnummer *",
+      commentLabel: "Opmerking (optioneel)",
+      removeComment: "Verwijderen",
+      commentPlaceholder: "Vertel ons waar we je mee kunnen helpen...",
+      addComment: "Opmerking toevoegen (optioneel)",
+      sending: "Verzenden...",
+      submit: "Verstuur aanvraag"
     }
   },
   en: {
@@ -425,6 +458,8 @@ export const translations = {
       bottomMessage: "Transparent, results-oriented and always focused on your team and goals.",
       bottomMessageHighlight: "",
       bottomMessageEnd: "",
+      savingsEstimate: "Save 150+ hours per year",
+      cta: "Schedule a free call",
       steps: [
         {
           number: "01",
@@ -547,6 +582,13 @@ export const translations = {
       hoursPerDay: "hours per day",
       currentlySpend: "How much time do you currently spend on this daily?",
       calculate: "Calculate Savings",
+      selectedLabel: "Selected:",
+      teamSizeLabel: "Number of employees",
+      person: "person",
+      people: "people",
+      savePrefix: "Save ",
+      hoursOver8: "8+ h",
+      hoursSuffix: "h",
       categories: [
         {
           id: "email",
@@ -616,6 +658,14 @@ export const translations = {
       email: "Email",
       phone: "Phone",
       calculateAgain: "Calculate again",
+      adjustLabel: "Adjust",
+      categoryLabel: "Category",
+      hoursPerDayShort: "Hours/day",
+      peopleLabel: "People",
+      ctaButton: "Save Time Now",
+      ctaSubtext: "No-obligation introductory call",
+      hoursPerDayLabel: "Hours per day",
+      orContactDirectly: "Or contact us directly:",
       solutions: {
         email: {
           title: "Email Automation",
@@ -681,6 +731,7 @@ export const translations = {
     },
     faq: {
       badge: "Frequently Asked Questions",
+      calculateLink: "Calculate your time savings",
       title: "Frequently Asked Questions",
       subtitle: "Find answers to the most common questions about automation and our services",
       questions: [
@@ -717,6 +768,21 @@ export const translations = {
           answer: "Yes, we offer various support options. For all our clients, there's a support channel where questions are answered within 24 hours. For critical processes, we offer more extensive SLAs with faster response times. Additionally, we proactively monitor all automations and you automatically receive a notification if something unexpected happens, often before you notice it yourself."
         }
       ]
+    },
+    contactForm: {
+      title: "Ready to Get Your Time Back?",
+      description: "Show your interest and we'll get in touch as soon as possible for a no-obligation call.",
+      errorDefault: "Something went wrong. Please try again or contact us directly by email.",
+      successTitle: "Thank you for your interest!",
+      successMessage: "We'll get in touch as soon as possible.",
+      emailPlaceholder: "you@email.com",
+      phoneLabel: "Phone number *",
+      commentLabel: "Comment (optional)",
+      removeComment: "Remove",
+      commentPlaceholder: "Tell us how we can help you...",
+      addComment: "Add a comment (optional)",
+      sending: "Sending...",
+      submit: "Submit request"
     }
   }
 } as const

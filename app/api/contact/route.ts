@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     // Validate required fields
     if (!email || !phone) {
       return NextResponse.json(
-        { error: 'Email en telefoonnummer zijn verplicht' },
+        { error: 'Email and phone number are required' },
         { status: 400 }
       )
     }
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     // Validate email format
     if (!EMAIL_REGEX.test(email)) {
       return NextResponse.json(
-        { error: 'Ongeldig email-adres' },
+        { error: 'Invalid email address' },
         { status: 400 }
       )
     }
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     // Validate phone format
     if (!PHONE_REGEX.test(phone)) {
       return NextResponse.json(
-        { error: 'Ongeldig telefoonnummer' },
+        { error: 'Invalid phone number' },
         { status: 400 }
       )
     }
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_your_api_key_here') {
       console.error('RESEND_API_KEY is not configured')
       return NextResponse.json(
-        { error: 'Email service niet geconfigureerd' },
+        { error: 'Email service not configured' },
         { status: 500 }
       )
     }
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
         <body>
           <div class="container">
             <div class="header">
-              <h1 style="margin: 0;">Nieuwe Contactaanvraag</h1>
+              <h1 style="margin: 0;">New Contact Request</h1>
               <p style="margin: 5px 0 0 0; opacity: 0.9;">via ElveonTech Website</p>
             </div>
             <div class="content">
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
                 <div class="value">${email}</div>
               </div>
               <div class="field">
-                <div class="label">Telefoonnummer:</div>
+                <div class="label">Phone number:</div>
                 <div class="value">${phone}</div>
               </div>
     `
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
     if (comment) {
       emailHtml += `
               <div class="field">
-                <div class="label">Opmerking:</div>
+                <div class="label">Comment:</div>
                 <div class="value">${comment.replace(/\n/g, '<br>')}</div>
               </div>
       `
@@ -93,12 +93,12 @@ export async function POST(request: NextRequest) {
     if (context && (context.category || context.hoursPerDay || context.numberOfPeople)) {
       emailHtml += `
               <div class="context">
-                <h3 style="margin-top: 0; color: #2563eb;">Context Informatie</h3>
+                <h3 style="margin-top: 0; color: #2563eb;">Context Information</h3>
       `
       if (context.category) {
         emailHtml += `
                 <div class="field">
-                  <div class="label">Categorie:</div>
+                  <div class="label">Category:</div>
                   <div class="value">${context.category}</div>
                 </div>
         `
@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
       if (context.hoursPerDay) {
         emailHtml += `
                 <div class="field">
-                  <div class="label">Uren per dag:</div>
+                  <div class="label">Hours per day:</div>
                   <div class="value">${context.hoursPerDay}</div>
                 </div>
         `
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
       if (context.numberOfPeople) {
         emailHtml += `
                 <div class="field">
-                  <div class="label">Aantal personen:</div>
+                  <div class="label">Number of people:</div>
                   <div class="value">${context.numberOfPeople}</div>
                 </div>
         `
@@ -126,8 +126,8 @@ export async function POST(request: NextRequest) {
 
     emailHtml += `
               <div class="footer">
-                <p>Deze aanvraag is ingediend via het contactformulier op elveontech.nl</p>
-                <p>Ontvangen op: ${new Date().toLocaleString('nl-NL', { timeZone: 'Europe/Amsterdam' })}</p>
+                <p>This request was submitted via the contact form on elveontech.nl</p>
+                <p>Received on: ${new Date().toLocaleString('en-GB', { timeZone: 'Europe/Amsterdam' })}</p>
               </div>
             </div>
           </div>
@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
     const { data, error } = await sendContactEmail({
       from: fromEmail,
       to: toEmail,
-      subject: `🔔 Nieuwe contactaanvraag${context?.category ? ` - ${context.category}` : ''}`,
+      subject: `🔔 New contact request${context?.category ? ` - ${context.category}` : ''}`,
       html: emailHtml,
       replyTo: email,
     })
@@ -153,13 +153,13 @@ export async function POST(request: NextRequest) {
 
       if (error.message?.includes('domain is not verified')) {
         return NextResponse.json(
-          { error: 'Email domein is nog niet geverifieerd. Wacht tot DNS records zijn goedgekeurd in Resend.' },
+          { error: 'Email domain is not verified yet. Wait until DNS records are approved in Resend.' },
           { status: 500 }
         )
       }
 
       return NextResponse.json(
-        { error: error.message || 'Fout bij verzenden van aanvraag' },
+        { error: error.message || 'Error sending request' },
         { status: 500 }
       )
     }
@@ -167,7 +167,7 @@ export async function POST(request: NextRequest) {
     if (!data?.id) {
       console.error('Resend returned no email id:', { data, error })
       return NextResponse.json(
-        { error: 'Email kon niet worden verzonden' },
+        { error: 'Email could not be sent' },
         { status: 500 }
       )
     }
@@ -197,20 +197,20 @@ export async function POST(request: NextRequest) {
     // Check for specific Resend errors
     if (error.message?.includes('API key')) {
       return NextResponse.json(
-        { error: 'Email configuratiefout - neem contact op met support' },
+        { error: 'Email configuration error - please contact support' },
         { status: 500 }
       )
     }
 
     if (error.message?.includes('domain')) {
       return NextResponse.json(
-        { error: 'Email domein niet geverifieerd - neem contact op met support' },
+        { error: 'Email domain not verified - please contact support' },
         { status: 500 }
       )
     }
 
     return NextResponse.json(
-      { error: 'Fout bij verzenden van aanvraag - probeer het later opnieuw' },
+      { error: 'Error sending request - please try again later' },
       { status: 500 }
     )
   }

@@ -30,9 +30,9 @@ const TIME_VALUES = [
   9       // 8+ hours (represented as 9 internally)
 ]
 
-const formatTimeValue = (hours: number) => {
-  if (hours >= 9) return "8+ uur"
-  if (hours >= 1) return `${hours} uur`
+const formatTimeValue = (hours: number, hoursOver8: string, hoursSuffix: string) => {
+  if (hours >= 9) return hoursOver8
+  if (hours >= 1) return `${hours}${hoursSuffix}`
   const minutes = Math.round(hours * 60)
   return `${minutes} min`
 }
@@ -67,6 +67,7 @@ function TimeSavingsResultContent() {
   const [showAdjust, setShowAdjust] = useState(false)
 
   const hoursPerDay = TIME_VALUES[sliderIndex]
+  const fmt = (h: number) => formatTimeValue(h, t.timeSavings.hoursOver8, t.timeSavings.hoursSuffix)
 
   // Update URL when category or hours change
   useEffect(() => {
@@ -149,7 +150,7 @@ function TimeSavingsResultContent() {
                           {t.timeSavingsResult.totalTimeSaved}
                         </h3>
                       </div>
-                      <span className="text-xs text-muted-foreground">per jaar</span>
+                      <span className="text-xs text-muted-foreground">{t.timeSavingsResult.perYearLabel}</span>
                     </div>
                     <div className="grid grid-cols-3 gap-3">
                       <div className="text-center">
@@ -210,7 +211,7 @@ function TimeSavingsResultContent() {
                     className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <SlidersHorizontal className="w-3.5 h-3.5" />
-                    Aanpassen
+                    {t.timeSavingsResult.adjustLabel}
                     <ChevronDown className={`w-3 h-3 transition-transform ${showAdjust ? "rotate-180" : ""}`} />
                   </button>
 
@@ -218,7 +219,7 @@ function TimeSavingsResultContent() {
                     <div className="mt-3 p-3 rounded-xl border border-border bg-card/80 space-y-3">
                       {/* Category */}
                       <div>
-                        <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Categorie</p>
+                        <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">{t.timeSavingsResult.categoryLabel}</p>
                         <div className="flex flex-wrap gap-1.5">
                           {t.timeSavings.categories.map((cat) => (
                             <button
@@ -238,16 +239,16 @@ function TimeSavingsResultContent() {
                       <div className="flex gap-6">
                         {/* Hours */}
                         <div>
-                          <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Uren/dag</p>
+                          <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">{t.timeSavingsResult.hoursPerDayShort}</p>
                           <div className="flex items-center gap-2">
                             <button onClick={() => setSliderIndex(Math.max(0, sliderIndex - 1))} className="w-6 h-6 rounded-md border border-border/60 flex items-center justify-center hover:bg-muted text-muted-foreground"><Minus className="w-3 h-3" /></button>
-                            <span className="text-sm font-semibold text-foreground min-w-[40px] text-center">{formatTimeValue(hoursPerDay)}</span>
+                            <span className="text-sm font-semibold text-foreground min-w-[40px] text-center">{fmt(hoursPerDay)}</span>
                             <button onClick={() => setSliderIndex(Math.min(TIME_VALUES.length - 1, sliderIndex + 1))} className="w-6 h-6 rounded-md border border-border/60 flex items-center justify-center hover:bg-muted text-muted-foreground"><Plus className="w-3 h-3" /></button>
                           </div>
                         </div>
                         {/* People */}
                         <div>
-                          <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Personen</p>
+                          <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">{t.timeSavingsResult.peopleLabel}</p>
                           <div className="flex items-center gap-2">
                             <button onClick={() => setNumberOfPeople(Math.max(1, numberOfPeople - 1))} className="w-6 h-6 rounded-md border border-border/60 flex items-center justify-center hover:bg-muted text-muted-foreground"><Minus className="w-3 h-3" /></button>
                             <span className="text-sm font-semibold text-foreground min-w-[40px] text-center">{numberOfPeople}</span>
@@ -272,11 +273,11 @@ function TimeSavingsResultContent() {
                     className="gap-3 px-8 py-6 text-base font-bold bg-gradient-to-r from-primary via-primary to-primary/80 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
                   >
                     <Clock className="w-5 h-5" />
-                    Bespaar Nu Tijd
+                    {t.timeSavingsResult.ctaButton}
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                   <p className="text-sm text-muted-foreground mt-3">
-                    Vrijblijvend kennismakingsgesprek
+                    {t.timeSavingsResult.ctaSubtext}
                   </p>
                 </div>
               </div>
@@ -285,7 +286,7 @@ function TimeSavingsResultContent() {
               <div className="hidden lg:block space-y-4 lg:sticky lg:top-24 lg:pt-2">
                 {/* Category list */}
                 <div>
-                  <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Categorie</p>
+                  <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">{t.timeSavingsResult.categoryLabel}</p>
                   <div className="space-y-0.5">
                     {t.timeSavings.categories.map((cat) => (
                       <button
@@ -307,7 +308,7 @@ function TimeSavingsResultContent() {
 
                 {/* Hours +/- */}
                 <div>
-                  <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Uren per dag</p>
+                  <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">{t.timeSavingsResult.hoursPerDayLabel}</p>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setSliderIndex(Math.max(0, sliderIndex - 1))}
@@ -316,7 +317,7 @@ function TimeSavingsResultContent() {
                       <Minus className="w-3 h-3" />
                     </button>
                     <span className="text-sm font-semibold text-foreground min-w-[44px] text-center">
-                      {formatTimeValue(hoursPerDay)}
+                      {fmt(hoursPerDay)}
                     </span>
                     <button
                       onClick={() => setSliderIndex(Math.min(TIME_VALUES.length - 1, sliderIndex + 1))}
@@ -329,7 +330,7 @@ function TimeSavingsResultContent() {
 
                 {/* People +/- */}
                 <div>
-                  <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">Personen</p>
+                  <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest mb-1.5">{t.timeSavingsResult.peopleLabel}</p>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setNumberOfPeople(Math.max(1, numberOfPeople - 1))}
@@ -398,7 +399,7 @@ function TimeSavingsResultContent() {
 
                 <div className="mt-6 pt-6 border-t border-primary-foreground/20 text-center">
                   <p className="text-sm text-primary-foreground/60 mb-3">
-                    Of neem direct contact op:
+                    {t.timeSavingsResult.orContactDirectly}
                   </p>
                   <div className="flex flex-col gap-2">
                     <a 

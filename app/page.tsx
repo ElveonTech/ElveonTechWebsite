@@ -30,8 +30,6 @@ export default function Home() {
                 <div className="max-w-xl mx-auto">
                   <ContactForm 
                     variant="primary"
-                    title="Klaar om Uw Tijd Terug te Krijgen?"
-                    description="Laat je interesse zien en wij nemen zo snel mogelijk contact met je op voor een vrijblijvend gesprek."
                   />
                 </div>
               </div>

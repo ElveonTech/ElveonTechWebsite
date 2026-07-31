@@ -72,7 +72,7 @@ export function Process() {
                       {isLast && (
                         <div className="flex items-center justify-center gap-2 mt-3 lg:mt-4 text-emerald-500 font-medium text-xs lg:text-sm bg-emerald-500/10 rounded-full px-3 lg:px-4 py-1.5 lg:py-2">
                           <TrendingUp className="w-3 h-3 lg:w-4 lg:h-4" />
-                          Bespaar 150+ uur per jaar
+                          {t.process.savingsEstimate}
                         </div>
                       )}
                     </div>
@@ -143,7 +143,7 @@ export function Process() {
             href="#contact" 
             className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           >
-            Plan een gratis gesprek
+            {t.process.cta}
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               className="w-5 h-5" 
